@@ -13,7 +13,7 @@ const Layout = ({
     
   return (
     <main className='h-full w-full'>
-      <Navbar/>
+      <Header/>
       <section className='min-h-[80vh] px-10 pt-1'>
         {children}
       </section>

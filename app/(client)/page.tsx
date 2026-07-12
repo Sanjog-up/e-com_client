@@ -17,7 +17,7 @@ export default function Home() {
       {/* Our category */}
       {/* featured products */}
       <NewArrivals/>
-        <TryOnPage/>
+        {/* <TryOnPage/> */}
       <Footer/>
     </main>
   )
