@@ -1,5 +1,4 @@
 'use client'
-import Header from '@/components/layout/header';
 import Navbar from '@/components/layout/header/index';
 import withAuth from '@/hoc/withAuth.hoc';
 import { Role } from '@/types/enum.types';
@@ -13,8 +12,8 @@ const Layout = ({
     
   return (
     <main className='h-full w-full'>
-      <Header/>
-      <section className='min-h-[80vh] px-10 pt-1'>
+      <Navbar/>
+      <section className='min-h-[80vh]  pt-1'>
         {children}
       </section>
       <div>

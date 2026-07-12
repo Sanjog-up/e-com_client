@@ -23,7 +23,6 @@ const CategorySection = () => {
         <div className='mt-4'>
             <CategoryList/>
         </div>
-        
     </div>
   )
 }
