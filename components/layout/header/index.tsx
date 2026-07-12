@@ -13,13 +13,10 @@ import { IUser } from "@/context/auth.context";
 
 const Navbar = () => {
     const { isAuthenticated, isLoading, logout, user } = useAuth();
-      const [isMenDropdownOpen, setIsMenDropdownOpen] = useState(false);
-  const onMouseEnter = () => {
-    setIsMenDropdownOpen(true);
-  };
-  const onMouseLeave = () => {
-    setIsMenDropdownOpen(false);
-  };
+    const [isMenDropdownOpen, setIsMenDropdownOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const onMouseEnter = () => {setIsMenDropdownOpen(true)};
+  const onMouseLeave = () => { setIsMenDropdownOpen(false)};
 
     return (
         <header className="sticky  top-0 z-50 border-b border-zinc-200 bg-white">
@@ -100,6 +97,20 @@ const Navbar = () => {
             {isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
           
         </nav>
+        {/* Mobile menu panel */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-zinc-200 bg-white px-4 py-4 flex flex-col gap-2">
+          <Link href={"/"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Home</Link>
+          <Link href={"/products"} className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Products</Link>
+          <Link href={"/about"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">About Us</Link>
+          <Link href={"/contact"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Contact Us</Link>
+          <Link href={"/categories"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Categories</Link>
+
+          <div className="pt-2 border-t border-zinc-100">
+            {isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
+          </div>
+        </div>
+      )}
 </header>
     )
   }

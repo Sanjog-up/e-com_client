@@ -3,8 +3,6 @@ import Button from '../common/ui/button'
 
 const Hero = () => {
   return (
-    <div>
-      
       <div className='relative h-150 w-full overflow-hidden'>
         <Image
         loading='eager'
@@ -13,7 +11,6 @@ const Hero = () => {
         alt='hero image'
         className='object-cover'
         />
-      </div>
       {/* overlay */}
       <div className='absolute  inset-0 bg-black/40'></div>
       {/* content */}
