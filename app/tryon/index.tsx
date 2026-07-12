@@ -77,7 +77,6 @@ export default function TryOnPage() {
         predictLoop();
       };
     } catch (err) {
-      console.error("Webcam access denied or unavailable:", err);
       setStatus("no-camera");
     }
   }

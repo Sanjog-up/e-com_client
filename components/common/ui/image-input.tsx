@@ -22,7 +22,7 @@ const ImageInput = ({ multiple = false, label, required=false, id, value, onChan
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
   //   const file = e.target.files;
-  //   console.log(e.target.files);
+ 
   const onHandleChange = (e:ChangeEvent<HTMLInputElement>)=> {
     if(!e.target.files || e.target.files.length === 0)
       return

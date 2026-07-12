@@ -5,18 +5,20 @@ import { useForm, useController } from "react-hook-form";
 import AdminListCard from "@/components/forms/admin/list-card";
 import Button from "@/components/common/ui/button";
 import ImageInput from "@/components/common/ui/image-input";
-import { categorySchema, TCategoryInput  } from "@/schema/category.scgema";
+import { categorySchema, TCategoryInput } from "@/schema/category.scgema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import api from "@/api";
 
 interface CategoryFormProps {
-  defaultValues?: TCategoryInput & { image?: {path: string; public_id:string}};
+  defaultValues?:
+    | (TCategoryInput & { image?: { path: string; public_id: string } })
+    | null;
   categoryId?: string;
 }
 
-const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
+const CategoryForm = ({ defaultValues, categoryId }: CategoryFormProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const isEditMode = Boolean(categoryId);
@@ -35,7 +37,7 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
       category: defaultValues?.category ?? "",
     },
   });
-  console.log(errors)
+  console.log(errors);
 
   // useEffect(()=> {
   //   if(defaultValues){
@@ -46,15 +48,15 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
   // }, [defaultValues, reset])
 
   useEffect(() => {
-    if(defaultValues){
-      reset (defaultValues)
+    if (defaultValues) {
+      reset(defaultValues);
     }
-  } , [defaultValues, reset])
+  }, [defaultValues, reset]);
 
-   const { field, fieldState } = useController({
+  const { field, fieldState } = useController({
     name: "image",
     control,
-  })
+  });
 
   const mutation = useMutation({
     mutationFn: async (formData: FormData) => {
@@ -69,8 +71,7 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
     },
   });
 
-
-  const onSumbit = (data:TCategoryInput)=>{
+  const onSumbit = (data: TCategoryInput) => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("category", data.category ?? "");
@@ -78,8 +79,8 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
       formData.append("image", data.image);
     }
     mutation.mutate(formData);
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
     <AdminListCard>
@@ -88,10 +89,11 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
           {isEditMode ? "Edit Category" : "Category Form"}
         </h4>
 
-        <form 
-        onSubmit={handleSubmit(onSumbit)}
-        noValidate
-        className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md">
+        <form
+          onSubmit={handleSubmit(onSumbit)}
+          noValidate
+          className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md"
+        >
           <Input
             label="Name"
             name="name"
@@ -116,18 +118,19 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
           />
 
           <ImageInput
-          label="product" 
-          id="products_category" 
-          value={field.value}
-          onChange={field.onChange}
-          error={fieldState.error?.message}
-          required={!isEditMode}/>
+            label="product"
+            id="products_category"
+            value={field.value}
+            onChange={field.onChange}
+            error={fieldState.error?.message}
+            required={!isEditMode}
+          />
           <div>
-
-            <Button 
-            label={mutation.isPending ? "Saving..." : "Submit"}
-            type="submit"
-            isLoading= {mutation.isPending} />
+            <Button
+              label={mutation.isPending ? "Saving..." : "Submit"}
+              type="submit"
+              isLoading={mutation.isPending}
+            />
           </div>
         </form>
       </div>

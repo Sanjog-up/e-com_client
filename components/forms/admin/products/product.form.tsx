@@ -59,10 +59,11 @@ const ProductForm = () => {
             multiline={false}
           />
 
-          <ImageInput label="product" id="products_Products" />
+          {/* <ImageInput 
+          label="product" id="products_Products" />
           <div>
             <Button label="Submit" type="submit" />
-          </div>
+          </div> */}
         </form>
       </div>
     </AdminListCard>
