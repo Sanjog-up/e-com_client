@@ -1,12 +1,21 @@
 "use client";
-import React from "react";
+
 import Image from "next/image";
 import { createColumnHelper } from "@tanstack/react-table";
 import { CiTrash } from "react-icons/ci";
 import { MdEditDocument } from "react-icons/md";
 import AdminListCard from "../list-card";
 import Table from "../table";
+import ActionButtons from "@/components/common/ui/action-button";
+import { getAllProducts } from "@/api/product.api";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast, { Toast } from "react-hot-toast";
+import api from "@/api";
+
 const ProductList = () => {
+  const queryClient = useQueryClient();
+  const { data, isLoading} = useQuery({ queryFn: () => getAllProducts(), queryKey: ["products"]});
+
   const defaultData = [
     {
       name: "Product 1",
@@ -44,60 +53,48 @@ const ProductList = () => {
       header: () => <span className="text-lg">Name</span>,
     }),
 
-    columnHelper.accessor((row) => row.logo, {
-      id: "logo",
-      cell: (info) => {
-        console.log(info.row.original.name);
-        return (
-          <div className="h-16 max-w-20 mx-auto ">
-            <Image
-              src={info.getValue().path}
-              alt={`${info.row.original.name}-logo`}
-              width={100}
-              height={100}
-              className="object-contain h-full w-full "
-            />
-          </div>
-        );
-      },
-      header: () => <span>Logo</span>,
+    columnHelper.accessor((row) => row.cover_image, {
+      id: "cover_image",
+      cell: (info) => <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto">
+        <Image
+        src={info.getValue()} 
+        alt={info.row.original.name}
+        width={100}
+        height={100}
+        className="object-contain h-full w-full"
+        />
+        </div>,
+      header: () => <span>Image</span>,
     }),
 
-    columnHelper.accessor((row) => row.description, {
-      id: "description",
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Description</span>,
-      footer: (info) => info.column.id,
+    columnHelper.accessor((row) => row.price, {
+      id: "price",
+      cell: (info) => <b>Rs.{info.getValue()}</b>,
+      header: () => <span>Price</span>,
     }),
-
-    columnHelper.accessor((row) => row.created_at, {
-      id: "created_at",
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Created At</span>,
-      footer: (info) => info.column.id,
+    columnHelper.accessor((row) => row.stock, {
+      id: "stcok",
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: () => <span>Stock</span>,
     }),
 
     columnHelper.accessor((row) => row, {
       id: "_",
       cell: (info) => (
-        <div className="flex gap-2 justify-center">
-          <CiTrash
-            title="Delete"
-            className="text-red-500 text-[20px] cursor-pointer"
-          />
-          <MdEditDocument
-            title="Edit"
-            className="text-blue-500 text-[20px] cursor-pointer"
-          />
-        </div>
+        <ActionButtons
+        editLink={`/admin/products/${info.row.original._id}`}
+        onDelete={async() => {
+          try {
+            await api.delete(`/products/${info.row.original._id}`);
+            queryClient.invalidateQueries({queryKey:["products"]})
+            toast.success(`${info.row.original.name} deleted`)
+          } catch {
+            toast.error("Failed to delete product");
+          }
+        }}
+        />
       ),
       header: () => <span>Actions</span>,
-    }),
-    columnHelper.accessor((row) => row.updated_at, {
-      id: "updated_at",
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Updated At</span>,
-      footer: (info) => info.column.id,
     }),
   ];
 
@@ -106,7 +103,7 @@ const ProductList = () => {
       <h4 className="text-[18px] font-semibold text-black-500">
         Products list
       </h4>
-      <Table data={defaultData} columns={columns} />
+      <Table data={data?.data ?? []} columns={columns} isLoading= {isLoading}/>
     </AdminListCard>
   );
 };

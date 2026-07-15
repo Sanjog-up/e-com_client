@@ -9,6 +9,7 @@ import {
 type IProps = {
     data:any[]
     columns:any[]
+    isLoading: boolean
 }
 
 function Table({data, columns}:IProps) {

@@ -1,3 +1,4 @@
+import axios from "axios";
 import api from ".";
 
 export const getAllProducts = async(params?: Record<string, any>) => {
@@ -27,7 +28,8 @@ export const createProduct = async (data: FormData) => {
   try {
     const response = await api.post("/products", data);
     return response.data;
-  } catch (error: any) {
-    throw error?.response?.data;
+  } catch (error) {
+    if(axios.isAxiosError(error))
+        throw error;
   }
 };
