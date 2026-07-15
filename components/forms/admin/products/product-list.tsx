@@ -14,7 +14,7 @@ import api from "@/api";
 
 const ProductList = () => {
   const queryClient = useQueryClient();
-  const { data, isLoading} = useQuery({ queryFn: () => getAllProducts(), queryKey: ["products"]});
+  const { data, isLoading, } = useQuery({ queryFn: () => getAllProducts(), queryKey: ["products"]});
 
   const defaultData = [
     {
@@ -57,7 +57,7 @@ const ProductList = () => {
       id: "cover_image",
       cell: (info) => <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto">
         <Image
-        src={info.getValue()} 
+        src={info.getValue() || "./public/images/next.svg"} 
         alt={info.row.original.name}
         width={100}
         height={100}
@@ -103,7 +103,7 @@ const ProductList = () => {
       <h4 className="text-[18px] font-semibold text-black-500">
         Products list
       </h4>
-      <Table data={data?.data ?? []} columns={columns} isLoading= {isLoading}/>
+      <Table data={data?.data ?? []} columns={columns} isLoading = {isLoading}/>
     </AdminListCard>
   );
 };

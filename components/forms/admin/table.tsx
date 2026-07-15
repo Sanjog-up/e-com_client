@@ -9,16 +9,17 @@ import {
 type IProps = {
     data:any[]
     columns:any[]
-    isLoading: boolean
+    isLoading?: boolean
 }
 
-function Table({data, columns}:IProps) {
+function Table({data, columns, isLoading}:IProps) {
 //   const [data, _setData] = React.useState(() => [...defaultData])
 //   const rerender = React.useReducer(() => ({}), {})[1]
 
   const table = useReactTable({
     data,
     columns,
+    
     getCoreRowModel: getCoreRowModel(),
   })
 
@@ -42,6 +43,7 @@ function Table({data, columns}:IProps) {
           ))}
         </thead>
         <tbody>
+
           {table.getRowModel().rows.map((row, i) => (
             <tr key={row.id} className={`h-16 text-center border-b border-gray-100 hover:bg-indigo-50 transition-all duration-300 ${i % 2 !==0 ? 'bg-indigo-50' : ''}`}>
               {row.getVisibleCells().map((cell) => (
