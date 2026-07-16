@@ -10,8 +10,7 @@ export const login = async (data: TLoginInput) => {
     );
     return response.data;
   } catch (error: any) {
-    
-    throw error.response.data;
+    throw error.response?.data ?? {message: error.message, success: false};
   }
 };
 
@@ -19,12 +18,12 @@ export const login = async (data: TLoginInput) => {
 export const register = async (data: TRegisterInput) => {
   try {
     const response = await api.post(
-      "auth/register",
+      "/auth/register",
       data,
     )
     return response.data
   } catch (error:any) {
-    throw error.response?.data ?? {mesaage: error.message, success: false};
+    throw error.response?.data ?? {message: error.message, success: false};
   }
 }
 
