@@ -19,12 +19,12 @@ export const login = async (data: TLoginInput) => {
 export const register = async (data: TRegisterInput) => {
   try {
     const response = await api.post(
-      "http://localhost:3001/api/v1/auth/register",
+      "auth/register",
       data,
     )
     return response.data
   } catch (error:any) {
-    throw error.response.data;
+    throw error.response?.data ?? {mesaage: error.message, success: false};
   }
 }
 
