@@ -30,7 +30,7 @@ const  ProductsList = () => {
         !isLoading && data?.data  && data?.data ?.length === 0
          && <div className='h-full w-full flex flex-col items-center justify-center'>
             <MdOutlineCloudOff className='text-indigo-300' size={38}/>
-            <p className='text-gray-500 font-medium text-lg'>Product not found</p>
+            <p className='text-gray-500 font-medium text-lg'>Products not found</p>
         </div>
       }
     </div>   

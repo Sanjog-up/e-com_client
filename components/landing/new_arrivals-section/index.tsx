@@ -1,9 +1,16 @@
-import React from 'react'
+'use client'
+import { getNewArrivals } from "@/api/product.api";
 import { FaChevronDown } from "react-icons/fa6";
-import CategoryList from '../category-section/list';
+import { useQuery } from "@tanstack/react-query";
+import ProductCard from "../featured-products/product-card";
+
 const NewArrivals = () => {
+    const { data, isLoading } = useQuery({
+        queryKey: [ "new arrivals"],
+        queryFn: getNewArrivals,
+    })
     return (
-        <div className='mt-10 py-4  bg-gray-50 min-h-60 px-20 '>
+        <div className='mt-10 py-4 bg-gray-50 min-h-60 px-20 '>
             {/* heading */}
             <div className='flex justify-between '>
                 {/* left section */}
@@ -20,12 +27,12 @@ const NewArrivals = () => {
 
             {/* card */}
             <div className='mt-4'>
-                <CategoryList/>
+                {isLoading && <p>Loading</p>}
+                {(data?.data ?? []).map((product:any)=> (
+                    <ProductCard key={product._id} products={product}/>
+                ))}
             </div>
-
-
-        </div>
+       </div>
     )
 }
-
 export default NewArrivals
