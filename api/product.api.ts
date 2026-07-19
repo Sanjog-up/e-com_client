@@ -14,7 +14,7 @@ export const getFeaturedProducts = async () =>
     getAllProducts({ sort : "-soldCount", limit: 8});
 
 export const getNewArrivals = async() => 
-    getAllProducts({ sort: "-createAt", limit:8});
+    getAllProducts({ sort: "-createdAt", limit:8});
 
 export const getProductById = async(id: string)=> {
     try {

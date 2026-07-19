@@ -16,9 +16,6 @@ const Layout = ({
       <section className='min-h-[80vh]  pt-1'>
         {children}
       </section>
-      <div>
-        Client footer
-      </div>
     </main>
   )
 }
