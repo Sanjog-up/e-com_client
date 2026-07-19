@@ -45,7 +45,6 @@ export const LoginForm = () =>{
             console.log('on Success', response)
             toast.success(response?.message ?? 'Login Success!!')
             router.replace('/')
-
         },
         onError: (error) =>
         {

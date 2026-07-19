@@ -33,6 +33,6 @@ export const getProfile = async () => {
     const response = await api.get("/auth/me")
     return response.data;
   } catch (error:any) {
-    throw error.response.data;
+    throw error.response?.data ?? {message: error.message, success: false};
   }
 }

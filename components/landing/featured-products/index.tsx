@@ -1,8 +1,15 @@
-import React from 'react'
+'use client'
+
 import { FaChevronDown } from "react-icons/fa6";
-import CategoryList from '../category-section/list';
-import CategoryCard from '../category-section/catefory-card';
+import { getFeaturedProducts } from "@/api/product.api";
+import { useQuery } from "@tanstack/react-query";
+import ProductCard from "./product-card";
+
 const FeaturedProducts = () => {
+    const { data, isLoading } = useQuery({
+        queryFn: getFeaturedProducts,
+        queryKey: ["featured products"]
+    });
     return (
         <div className='mt-10 py-4  bg-gray-50 min-h-60 px-20 '>
             {/* heading */}
@@ -21,7 +28,10 @@ const FeaturedProducts = () => {
 
             {/* card */}
             <div className='mt-4'>
-                <CategoryList/>
+                {isLoading && <p>Loading</p>}
+                {(data?.data ?? []).map((product:any) => (
+                    <ProductCard key={product._id} products={product} />
+                ))}
             </div>
 
 
