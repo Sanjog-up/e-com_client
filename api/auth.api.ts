@@ -36,3 +36,13 @@ export const getProfile = async () => {
     throw error.response?.data ?? {message: error.message, success: false};
   }
 }
+
+// logout
+export const logoutApi = async() => {
+  try {
+    const response = await api.get("/auth/logout");
+    return response.data;
+  } catch (error:any) {
+    throw error.response?.data ?? {message: error.message, success: false};
+  }
+}

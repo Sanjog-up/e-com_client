@@ -9,7 +9,7 @@ import { LuLogIn } from "react-icons/lu";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { useAuth } from "@/hooks/auth.hook";
 import { IUser } from "@/context/auth.context";
-
+import { HiOutlineMenu } from "react-icons/hi";
 
 const Navbar = () => {
     const { isAuthenticated, isLoading, logout, user } = useAuth();
@@ -19,7 +19,7 @@ const Navbar = () => {
   const onMouseLeave = () => { setIsMenDropdownOpen(false)};
 
     return (
-        <header className="sticky  top-0 z-50 border-b border-zinc-200 bg-white">
+        <header className="sticky min-w-fit top-0 z-50 border-b border-zinc-200 bg-white">
         <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors gap-4">
             
             <Link href={"/"} 
@@ -32,25 +32,26 @@ const Navbar = () => {
               width={100}/>
               </div>Grey Matter </Link>  
 
-            <div className="flex items-center">
+            {/* desktop nav - hidden below md breakpoint */}
+            <div className="hidden  md:flex items-center">
             <section className="flex items-center gap-2  scrollbar-hide min-w-0">
             <Link href={"/"} 
-            className='italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl whitespace-nowrap shrink-0' >
+            className='italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl whitespace-nowrap ' >
             Home
             </Link>
 
             <Link href={"/products"} 
-            className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl shrink-0">
+            className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl ">
             Products
             </Link>
 
             <Link href={"/about"} 
-            className="italic font-serif font-semibold text-blue-800 px-2 py-2 shrink-0 hover:bg-blue-300 rounded-xl whitespace-nowrap">
+            className="italic font-serif font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap">
             About Us
             </Link>
 
             <Link href={"/contact"} 
-            className="italic font-serif shrink-0 font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap">
+            className="italic font-serif  font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap">
             Contact Us
             </Link>  
             </section>        
@@ -94,8 +95,17 @@ const Navbar = () => {
             </div>
 
             {/* auth & cart */}
+            <div className="hidden md:block">
             {isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
-          
+            </div>
+
+            {/* mobile hamburger toggle */}
+            <button className="md: hidden"
+            onClick={()=> setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            >
+                <HiOutlineMenu size={26} className="text-blue-700"/>
+            </button>
         </nav>
         {/* Mobile menu panel */}
       {isMobileMenuOpen && (
@@ -141,7 +151,7 @@ const AuthUser = ({
                 {/* profile image  */}
                 <div className="h-14 aspect-square rounded-full overflow-clip p-0.5 border border-indigo-200">
                     <Image
-                        src={user?.profile_image ? user?.profile_image.path : "/hero.jpg"}
+                        src={user?.profile_image ? user?.profile_image.path : "/images/asap.webp"}
                         alt="profile_image"
                         height={200}
                         width={200}

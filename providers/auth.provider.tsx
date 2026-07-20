@@ -1,12 +1,12 @@
 'use client'
 
-import { getProfile } from '@/api/auth.api'
+import { getProfile, logoutApi } from '@/api/auth.api'
 import AuthContext from '@/context/auth.context'
-import { useQueries, useQuery } from '@tanstack/react-query'
+import { QueryClient, useQueries, useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 
 const AuthProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
-
+    const queryClient = useQueryClient();
     const {data, isLoading} = useQuery({
         queryFn: getProfile,
         queryKey: ['me'],
@@ -17,6 +17,13 @@ const AuthProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
     })
     console.log('auth provider', data?.data)
     
+    const logout = async() => {
+      try{
+        await logoutApi();
+      } finally{
+        queryClient.setQueryData(['me'], null)
+      }
+    }
   return (
     <AuthContext.Provider 
     value={{
