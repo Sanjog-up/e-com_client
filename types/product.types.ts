@@ -16,4 +16,5 @@ export type TProduct = {
     new_arrival: boolean,
     soldCount: number,
     createdAt: string,
+    featured: boolean,
 }

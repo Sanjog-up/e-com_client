@@ -5,7 +5,7 @@ const Supported_Formats = ["image/jpeg", "image/png", "image/webp"];
 
 export const categorySchema = yup.object({
     name: yup.string().required(),
-    category: yup
+    description: yup
     .string()
     .required(),
 

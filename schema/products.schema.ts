@@ -14,10 +14,12 @@ export const productsSchema = yup.object({
     description: yup.string().min(25, "at least 25 chars req.").required(),
     price: yup.number().required().typeError("price must be a number").positive(),
     stock:yup.number().required().typeError("stock must be a numebr").min(0),
-    categoty: yup.string().required("category is required"),
+    category: yup.string().required("category is required"),
     brand: yup.string().required("brand is required"),
     cover_image: yup.mixed<File | string >().required("cover image is required").test("filesize", "File must be under 5mb", imageTest),
-    images: yup.array().of(yup.mixed<File | string>()).min(1, "at least one gallery image required")
+    images: yup.array().of(yup.mixed<File | string>()).min(1, "at least one gallery image required"),
+    new_arrival: yup.boolean().default(false),
+    featured: yup.boolean().default(false),
 })
 
 export type TProductInput = yup.InferType<typeof productsSchema>;

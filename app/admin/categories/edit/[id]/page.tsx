@@ -35,8 +35,8 @@ const EditCategoryPage = () => {
       <CategoryForm 
       defaultValues={category?.data ? {
         name: category.data.name,
-        category: category.data.category ?? "",
-        image: category.data.image?.path ?? "",
+        description: category.data.description ?? "",
+        image: category.data.image  ?? "",
       }: null
       }
       categoryId={id} />

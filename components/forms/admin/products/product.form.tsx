@@ -1,6 +1,7 @@
 "use client";
 import Input from "@/components/common/ui/input";
 import { useForm, useController  } from "react-hook-form";
+import { useEffect, useRef } from "react";
 import AdminListCard from "@/components/forms/admin/list-card";
 import Button from "@/components/common/ui/button";
 import ImageInput from "@/components/common/ui/image-input";
@@ -35,15 +36,18 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
     handleSubmit,
     control,
   } = useForm<TProductInput>({
+    resolver: yupResolver(productsSchema),
     defaultValues: {
       name: defaultValues?.name ?? "",
       description: defaultValues?.description ?? "",
       price: defaultValues?.price ?? undefined,
       stock: defaultValues?.stock ?? undefined,
-      categoty: defaultValues?.categoty ?? "",
+      category: defaultValues?.category ?? "",
       brand: defaultValues?.brand ?? "",
       cover_image: defaultValues?.cover_image ?? undefined,
       images: defaultValues?.images ?? [],
+      new_arrival: defaultValues?.new_arrival ?? false,
+      featured: defaultValues?.featured ?? false,
     },
   });
 
@@ -66,8 +70,12 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
     formData.append("description", data.description);
     formData.append("price", String(data.price));
     formData.append("stock", String(data.stock));
-    formData.append("category", data.categoty);
+    formData.append("category", data.category);
     formData.append("brand", data.brand);
+    formData.append("new_arrival", String(data.new_arrival ?? false));
+    formData.append("featured", String(data.featured ?? false));
+
+
     if(data.cover_image instanceof File) formData.append("cover_image", data.cover_image);
     (data.images?? []).forEach((img)=> {
       if(img instanceof File) formData.append("images", img)
@@ -82,7 +90,7 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
           {isEditMode ? "Edit product" : "Product form"}
         </h4>
 
-        <form className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md">
           <Input
             label="Name"
             name="name"
@@ -120,7 +128,7 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
 
           <Input
           label="Stock"
-          name="stcok"
+          name="stock"
           type="number"
           id="stock"
           placeholder="0"
@@ -132,7 +140,7 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
           name="category"
           id="category"
           register={register}
-          error={errors.categoty?.message}
+          error={errors.category?.message}
           required
           options={(categories?.data ?? []).map((c:any)=> ({
             label: c.name, value: c._id
@@ -154,6 +162,13 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
           error={coverState.error?.message}
           required={!isEditMode}
           />
+
+          <label className="flex items-center gap-2">
+            <input type="checkbox" {...register("new_arrival")}/>New Arrival
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="checkbox" {...register("featured")}/>Featured
+          </label>
 
           <div>
             <Button label={mutation.isPending ? "Saving..." : "Submit"} type="submit" 

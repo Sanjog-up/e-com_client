@@ -34,7 +34,7 @@ const CategoryForm = ({ defaultValues, categoryId }: CategoryFormProps) => {
     defaultValues: {
       name: defaultValues?.name ?? "",
       image: defaultValues?.image?.path ?? undefined,
-      category: defaultValues?.category ?? "",
+      description: defaultValues?.description ?? "",
     },
   });
   console.log(errors);
@@ -47,9 +47,15 @@ const CategoryForm = ({ defaultValues, categoryId }: CategoryFormProps) => {
   //   }
   // }, [defaultValues, reset])
 
+  const resetOnce = React.useRef(false);
   useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues);
+    if (defaultValues && !resetOnce.current) {
+      reset({
+        name: defaultValues.name ?? "",
+      description: defaultValues.description ?? "",
+    image: defaultValues.image?.path ?? undefined,
+  });
+  resetOnce.current = true;
     }
   }, [defaultValues, reset]);
 
@@ -74,7 +80,7 @@ const CategoryForm = ({ defaultValues, categoryId }: CategoryFormProps) => {
   const onSumbit = (data: TCategoryInput) => {
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("category", data.category ?? "");
+    formData.append("description", data.description ?? "");
     if (data.image instanceof File) {
       formData.append("image", data.image);
     }
@@ -106,14 +112,14 @@ const CategoryForm = ({ defaultValues, categoryId }: CategoryFormProps) => {
           />
 
           <Input
-            label="Category"
-            name="category"
+            label="Description"
+            name="description"
             type="text"
-            id={"category"}
+            id={"description"}
             placeholder="categorize your product"
             register={register}
             required
-            error={errors.category?.message}
+            error={errors.description?.message}
             multiline={false}
           />
 

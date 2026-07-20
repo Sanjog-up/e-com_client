@@ -57,7 +57,7 @@ const ProductList = () => {
       id: "cover_image",
       cell: (info) => <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto">
         <Image
-        src={info.getValue() || "./public/images/next.svg"} 
+        src={info.getValue() || "/next.svg"} 
         alt={info.row.original.name}
         width={100}
         height={100}
@@ -77,6 +77,48 @@ const ProductList = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: () => <span>Stock</span>,
     }),
+    columnHelper.accessor((row) => row.new_arrival, {
+  id: "new_arrival",
+  cell: (info) => (
+    <input
+      type="checkbox"
+      checked={!!info.getValue()}
+      onChange={async (e) => {
+        try {
+          const formData = new FormData();
+          formData.append("new_arrival", String(e.target.checked));
+          await api.patch(`/products/${info.row.original._id}`, formData);
+          queryClient.invalidateQueries({ queryKey: ["products"] });
+          toast.success("Updated");
+        } catch {
+          toast.error("Failed to update");
+        }
+      }}
+    />
+  ),
+  header: () => <span>New Arrival</span>,
+}),
+columnHelper.accessor((row) => row.featured, {
+  id: "featured",
+  cell: (info) => (
+    <input
+      type="checkbox"
+      checked={!!info.getValue()}
+      onChange={async (e) => {
+        try {
+          const formData = new FormData();
+          formData.append("featured", String(e.target.checked));
+          await api.patch(`/products/${info.row.original._id}`, formData);
+          queryClient.invalidateQueries({ queryKey: ["products"] });
+          toast.success("Updated");
+        } catch {
+          toast.error("Failed to update");
+        }
+      }}
+    />
+  ),
+  header: () => <span>Featured</span>,
+}),
 
     columnHelper.accessor((row) => row, {
       id: "_",
