@@ -1,4 +1,4 @@
-import yup from 'yup'
+import * as yup from 'yup'
 
 const Max_Size = 5 * 1024 * 1024;
 const Supported_Formats = ["image/jpeg", "image/png", "image/webp"];
@@ -17,7 +17,7 @@ export const productsSchema = yup.object({
     category: yup.string().required("category is required"),
     brand: yup.string().required("brand is required"),
     cover_image: yup.mixed<File | string >().required("cover image is required").test("filesize", "File must be under 5mb", imageTest),
-    images: yup.array().of(yup.mixed<File | string>()).min(1, "at least one gallery image required"),
+    images: yup.array().of(yup.mixed<File | string>().required()).min(1, "at least one gallery image required").required("atleast 1 gallery image is required"),
     new_arrival: yup.boolean().default(false),
     featured: yup.boolean().default(false),
 })

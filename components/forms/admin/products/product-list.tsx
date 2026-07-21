@@ -54,8 +54,14 @@ const ProductList = () => {
     }),
 
     columnHelper.accessor((row) => row.cover_image, {
+      
       id: "cover_image",
-      cell: (info) => <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto">
+      cell: (info) => {
+      const value = info.getValue();
+      const src = typeof value === "string" && value.length > 0 ? value: "/next.svg";
+      return(
+      <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto">
+        
         <Image
         src={info.getValue() || "/next.svg"} 
         alt={info.row.original.name}
@@ -63,7 +69,7 @@ const ProductList = () => {
         height={100}
         className="object-contain h-full w-full"
         />
-        </div>,
+        </div>)},
       header: () => <span>Image</span>,
     }),
 
@@ -73,7 +79,7 @@ const ProductList = () => {
       header: () => <span>Price</span>,
     }),
     columnHelper.accessor((row) => row.stock, {
-      id: "stcok",
+      id: "stock",
       cell: (info) => <span>{info.getValue()}</span>,
       header: () => <span>Stock</span>,
     }),

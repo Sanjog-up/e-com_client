@@ -50,6 +50,7 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
       featured: defaultValues?.featured ?? false,
     },
   });
+
   const resetOnce = useRef(false);
 useEffect(()=> {
   if(defaultValues && !resetOnce.current){
@@ -70,7 +71,8 @@ useEffect(()=> {
 },[defaultValues, resetOnce])
 
   const { field: coverField, fieldState: coverState } = useController({ name: "cover_image", control });
-  
+  const { field: imagesField, fieldState: imagesState } = useController({ name: "images", control });
+
   const mutation = useMutation({
     mutationFn: async (formData: FormData)=> {
       if(isEditMode)return api.patch(`/products/${productId}`, formData);
@@ -179,6 +181,15 @@ useEffect(()=> {
           error={coverState.error?.message}
           required={!isEditMode}
           />
+
+          <ImageInput
+            multiple
+            label="Gallery images" id="products_gallery"
+            value={imagesField.value}
+            onChange={imagesField.onChange}
+            error={imagesState.error?.message}
+            required={!isEditMode}
+            />
 
           <label className="flex items-center gap-2">
             <input type="checkbox" {...register("new_arrival")}/>New Arrival
