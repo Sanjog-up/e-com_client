@@ -58,12 +58,12 @@ const ProductList = () => {
       id: "cover_image",
       cell: (info) => {
       const value = info.getValue();
-      const src = typeof value === "string" && value.length > 0 ? value: "/next.svg";
+      const src = typeof value === "string" ? value :  value?.path ||  "/next.svg";
       return(
       <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto">
         
         <Image
-        src={info.getValue() || "/next.svg"} 
+        src={src} 
         alt={info.row.original.name}
         width={100}
         height={100}
