@@ -50,6 +50,24 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
       featured: defaultValues?.featured ?? false,
     },
   });
+  const resetOnce = useRef(false);
+useEffect(()=> {
+  if(defaultValues && !resetOnce.current){
+    reset({
+      name: defaultValues?.name ?? "",
+      description: defaultValues?.description ?? "",
+      price: defaultValues?.price ?? undefined,
+      stock: defaultValues?.stock ?? undefined,
+      category: defaultValues?.category ?? "",
+      brand: defaultValues?.brand ?? "",
+      cover_image: defaultValues?.cover_image ?? undefined,
+      images: defaultValues?.images ?? [],
+      new_arrival: defaultValues?.new_arrival ?? false,
+      featured: defaultValues?.featured ?? false,
+    });
+    resetOnce.current = true;
+  }
+},[defaultValues, resetOnce])
 
   const { field: coverField, fieldState: coverState } = useController({ name: "cover_image", control });
   
@@ -123,7 +141,6 @@ const ProductForm = ({ defaultValues, productId}: ProductFormProps) => {
             error={errors.price?.message}
             register={register}
             required
-            multiline={false}
           />
 
           <Input
