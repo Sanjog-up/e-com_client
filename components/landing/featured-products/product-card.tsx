@@ -1,17 +1,26 @@
-import React from 'react'
+'use client'
+
 import { TProduct } from '@/types/product.types'
 import Image from 'next/image'
 
-interface IProps {
-    products: TProduct 
+interface Product{
+  _id: string,
+  name: string,
+  price: number,
+  discountedPrice?: number,
+  images: string[],
+  brand?: string;
 }
-const ProductCard = ({products}:IProps) => {
+const ProductCard = ({product}:{product:Product[]}) => {
+  const { openProduct } = useProd
   return (
+    <button
+    onClick={()=> openPr}
     <div className='flex flex-col borderborder-indigo-100 rounded-sm overflow-hidden'>
       <div className='relative w-full h-56 aspect-square'>
         <Image
-        src={products.cover_image.path}
-        alt={products.name}
+        src={product.cover_image.path}
+        alt={product.name}
         fill
         className='rounded-sm object-cover'
         />

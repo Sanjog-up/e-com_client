@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllProducts } from '@/api/product.api'
 import { MdOutlineCloudOff } from 'react-icons/md'
 
-const  ProductsList = () => {
+const  FeaturedList = () => {
     const {isLoading, data, error} = useQuery({
       queryFn: getAllProducts,
       queryKey: ['get-all-products'],
@@ -16,13 +16,13 @@ const  ProductsList = () => {
     
       {/* loading */}
       {isLoading && <div className='w-full grid grid-cols-5 gap-4'>
-        {Array.from({ length: 10}, (_,i) => i +1).map((val)=> (<ProductsSkeleton key={val}/>))}
+        {Array.from({ length: 10}, (_,i) => i +1).map((val)=> (<FeaturedSkeleton key={val}/>))}
         </div>}
 
         {/* map data */}
         {!isLoading && data?.data && data?.data .length> 0 && 
         (<div className='grid grid-cols-5 gap-4'>
-          {data?.data .map((products: TProduct) => (<ProductCard products={products} key={products._id}/>))}
+          {data?.data .map((products: TProduct) => (<ProductCard product={products} key={products._id}/>))}
         </div>)}
 
         {/* notfound */}
@@ -37,7 +37,7 @@ const  ProductsList = () => {
   )
 }
 
-const ProductsSkeleton = () => {
+const FeaturedSkeleton = () => {
   return (
     <div className='animate-pulse h-20 w-full bg-gray-200 p-1 rounded'>
       <div className='grid grid-cols-12 gap-2'>
@@ -50,4 +50,4 @@ const ProductsSkeleton = () => {
     </div>
   )
 }
-export default ProductsList
+export default FeaturedList
