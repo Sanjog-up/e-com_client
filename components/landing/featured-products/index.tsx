@@ -11,7 +11,7 @@ const FeaturedProducts = () => {
         queryKey: ["featured-products"]
     });
     return (
-        <div className='mt-10 py-4  bg-gray-50 min-h-60 px-20 '>
+        <div className='mt-10 py-4 bg-blue-100 min-h-60 px-20 '>
             {/* heading */}
             <div className='flex justify-between '>
                 {/* left section */}
@@ -33,8 +33,6 @@ const FeaturedProducts = () => {
                     <ProductCard key={product._id} product={product} />
                 ))}
             </div>
-
-
         </div>
     )
 }

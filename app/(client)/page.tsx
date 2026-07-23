@@ -12,10 +12,9 @@ export default function Home() {
     <main className="min-h-screen w-full ">
       {/* <LandingPage/> */}
       <Hero/> 
-      {/* Our category */}
-      <FeaturedProducts/>
+       <FeaturedProducts/>
       <NewArrivals/>
-      <section>
+      <section className="pt-10 py-3 px-20  bg-blue-100">
         <h2 className="text-xl font-bold text-gray-600 tracking-wider mb-4">All Products</h2>
         <ProductsList/>
       </section>

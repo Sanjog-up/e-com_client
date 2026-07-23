@@ -1,4 +1,3 @@
-import React from 'react'
 import { TCategory } from '@/types/category.types'
 import Image from 'next/image'
 

@@ -12,9 +12,7 @@ const CategoryList = () => {
     })
   return (
     <div className='h-full'>
-
-    
-      {/* loading */}
+     {/* loading */}
       {isLoading && <div className='w-full grid grid-cols-5 gap-4'>
         {Array.from({ length: 10}, (_,i) => i +1).map((val)=> (<CategorySkeleton key={val}/>))}
         </div>}

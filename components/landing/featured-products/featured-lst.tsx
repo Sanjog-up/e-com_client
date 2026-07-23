@@ -5,15 +5,13 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllProducts } from '@/api/product.api'
 import { MdOutlineCloudOff } from 'react-icons/md'
 
-const  FeaturedList = () => {
+const  ProductList = () => {
     const {isLoading, data, error} = useQuery({
       queryFn: getAllProducts,
       queryKey: ['get-all-products'],
     })
   return (
     <div className='h-full'>
-
-    
       {/* loading */}
       {isLoading && (
         <div className='w-full grid grid-cols-5 gap-4'>
@@ -53,4 +51,4 @@ const FeaturedSkeleton = () => {
     </div>
   )
 }
-export default FeaturedList
+export default  ProductList

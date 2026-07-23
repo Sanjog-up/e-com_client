@@ -12,9 +12,11 @@ export const ProductModal = () => {
         queryKey:['product', productId],
         queryFn: () => getProductById(productId as string),
         enabled: !!productId,
+        
     })
 
-    const product: TProduct | undefined = data?.data
+
+    const product: TProduct | undefined = data?.data?.[0]
     if(!productId)
         return null
     return(
@@ -36,9 +38,10 @@ export const ProductModal = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className=" relative aspect-square rounded-lg overflow-hidden bg-gray-100">
                                 <Image 
-                                src={product.cover_image.path}
-                                alt={product.name}
+                                src={product.cover_image?.path}
+                                alt={product.name }
                                 fill
+                                loading="eager"
                                 className="object-cover"/>
                             </div>
                             <div>
