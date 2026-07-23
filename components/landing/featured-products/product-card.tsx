@@ -3,19 +3,24 @@
 import { TProduct } from '@/types/product.types'
 import Image from 'next/image'
 
+interface ProductImage {
+  path: string,
+  public_id: string
+} 
+
 interface Product{
   _id: string,
   name: string,
+  description: string,
   price: number,
   discountedPrice?: number,
-  images: string[],
-  brand?: string;
+  images: ProductImage[],
+  cover_image: ProductImage
 }
-const ProductCard = ({product}:{product:Product[]}) => {
-  const { openProduct } = useProd
+const ProductCard = ({product}:{product:Product}) => {
   return (
-    <button
-    onClick={()=> openPr}
+    // <button
+    // onClick={()=> openPr}
     <div className='flex flex-col borderborder-indigo-100 rounded-sm overflow-hidden'>
       <div className='relative w-full h-56 aspect-square'>
         <Image
@@ -27,8 +32,8 @@ const ProductCard = ({product}:{product:Product[]}) => {
 
       </div>
       <div className='p-3'>
-        <p className='text-lg font-semibold text-gray-400'>{products.name}</p>
-        <p className='line-clamp-2 leading-5 text-sm text-gray-400'>{products.description}</p>
+        <p className='text-lg font-semibold text-gray-400'>{product.name}</p>
+        <p className='line-clamp-2 leading-5 text-sm text-gray-400'>{product.description}</p>
       </div>
     </div>
   )

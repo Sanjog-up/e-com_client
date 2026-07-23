@@ -15,24 +15,27 @@ const  FeaturedList = () => {
 
     
       {/* loading */}
-      {isLoading && <div className='w-full grid grid-cols-5 gap-4'>
+      {isLoading && (
+        <div className='w-full grid grid-cols-5 gap-4'>
         {Array.from({ length: 10}, (_,i) => i +1).map((val)=> (<FeaturedSkeleton key={val}/>))}
-        </div>}
+        </div>)}
 
         {/* map data */}
-        {!isLoading && data?.data && data?.data .length> 0 && 
+        {!isLoading && data?.data && data.data.length> 0 && 
         (<div className='grid grid-cols-5 gap-4'>
-          {data?.data .map((products: TProduct) => (<ProductCard product={products} key={products._id}/>))}
+          {data?.data.map((product: TProduct) => (
+            <ProductCard product={product} key={product._id}
+            />))}
         </div>)}
 
         {/* notfound */}
       {
-        !isLoading && data?.data  && data?.data ?.length === 0
-         && <div className='h-full w-full flex flex-col items-center justify-center'>
+      !isLoading && data?.data  && data?.data.length === 0
+         && (<div className='h-full w-full flex flex-col items-center justify-center'>
             <MdOutlineCloudOff className='text-indigo-300' size={38}/>
             <p className='text-gray-500 font-medium text-lg'>Products not found</p>
         </div>
-      }
+      )}
     </div>   
   )
 }

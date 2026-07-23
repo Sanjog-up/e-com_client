@@ -8,7 +8,7 @@ import ProductCard from "./product-card";
 const FeaturedProducts = () => {
     const { data, isLoading } = useQuery({
         queryFn: getFeaturedProducts,
-        queryKey: ["featured products"]
+        queryKey: ["featured-products"]
     });
     return (
         <div className='mt-10 py-4  bg-gray-50 min-h-60 px-20 '>
@@ -27,10 +27,10 @@ const FeaturedProducts = () => {
             </div>
 
             {/* card */}
-            <div className='mt-4'>
-                {isLoading && <p>Loading</p>}
+            <div className='mt-4 grid grid-cols-5 gap-4'>
+                {isLoading && <p>Loading...</p>}
                 {(data?.data ?? []).map((product:any) => (
-                    <ProductCard key={product._id} products={product} />
+                    <ProductCard key={product._id} product={product} />
                 ))}
             </div>
 

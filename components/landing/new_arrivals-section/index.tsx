@@ -29,7 +29,7 @@ const NewArrivals = () => {
             <div className='mt-4'>
                 {isLoading && <p>Loading</p>}
                 {(data?.data ?? []).map((product:any)=> (
-                    <ProductCard key={product._id} products={product}/>
+                    <ProductCard key={product._id} product={product}/>
                 ))}
             </div>
        </div>

@@ -11,10 +11,6 @@ const ReactQueryProvider = ({children}: Readonly<{children: React.ReactNode}>) =
     <QueryClientProvider client={client}>
         {children}
     </QueryClientProvider>
-    <ProductModalProvider>
-      {children}
-      <ProdcutQ
-    </ProductModalProvider>
   )
 }
 
