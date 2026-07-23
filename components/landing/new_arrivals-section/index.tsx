@@ -10,7 +10,7 @@ const NewArrivals = () => {
         queryFn: getNewArrivals,
     })
     return (
-        <div className='mt-10 py-4 bg-blue-100 min-h-60 px-20 '>
+        <div className='pt-10 py-4 bg-blue-100 min-h-60 px-32 '>
             {/* heading */}
             <div className='flex justify-between '>
                 {/* left section */}
@@ -26,7 +26,7 @@ const NewArrivals = () => {
             </div>
 
             {/* card */}
-            <div className='mt-4 grid grid-cols-5 gap-4'>
+            <div className='mt-4 grid grid-cols-5 gap-4 '>
                 {isLoading && <p>Loading</p>}
                 {(data?.data ?? []).map((product:any)=> (
                     <ProductCard key={product._id} product={product}/>

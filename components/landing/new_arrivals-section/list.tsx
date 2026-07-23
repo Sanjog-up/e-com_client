@@ -48,4 +48,5 @@ const CategorySkeleton = () => {
     </div>
   )
 }
+
 export default CategoryList

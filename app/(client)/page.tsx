@@ -14,7 +14,7 @@ export default function Home() {
       <Hero/> 
        <FeaturedProducts/>
       <NewArrivals/>
-      <section className="pt-10 py-3 px-20  bg-blue-100">
+      <section className="pt-10 py-3 px-32  bg-blue-100">
         <h2 className="text-xl font-bold text-gray-600 tracking-wider mb-4">All Products</h2>
         <ProductsList/>
       </section>
