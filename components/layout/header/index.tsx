@@ -100,7 +100,7 @@ const Navbar = () => {
             </div>
 
             {/* mobile hamburger toggle */}
-            <button className="md: hidden"
+            <button className="md:hidden"
             onClick={()=> setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
             >

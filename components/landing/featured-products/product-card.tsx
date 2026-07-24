@@ -10,8 +10,8 @@ const ProductCard = ({product}:{product:TProduct}) => {
     <button
     onClick={()=> openProduct(product._id)}
     className='text-left w-full'>
-    <div className='flex flex-col borderborder-indigo-100 rounded-sm overflow-hidden'>
-      <div className='relative w-full h-56 aspect-square'>
+    <div className='flex flex-col borderborder-indigo-100 rounded-sm overflow-hidden bg-black'>
+      <div className='relative w-full h-56 aspect-square overflow-hidden'>
         <Image
         src={product.cover_image.path}
         alt={product.name}
@@ -21,7 +21,7 @@ const ProductCard = ({product}:{product:TProduct}) => {
 
       </div>
       <div className='p-3'>
-        <p className='text-lg font-semibold text-gray-400'>{product.name}</p>
+        <p className='text-lg font-semibold text-gray-300 line-clamp-1' >{product.name}</p>
         <p className='line-clamp-2 leading-5 text-sm text-gray-400'>{product.description}</p>
       </div>
     </div>

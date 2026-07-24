@@ -54,15 +54,13 @@ import ExploreDropDown from "@/components/sort.exploreall/dropdown";
 import { useExploreOptions } from "@/components/sort.exploreall/explore.option";
 
 const FeaturedProducts = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<{data: TProduct[]}>({
     queryFn: getFeaturedProducts,
     queryKey: ["featured-products"],
   });
   const exploreOptions = useExploreOptions();
 
   return (
-    // pt-10 keeps the spacing *inside* this section so its background
-    // isn't broken up by a margin gap showing the page background through
     <div className="pt-10 pb-4 min-h-60 px-32 bg-blue-100">
       {/* heading */}
       <div className="flex justify-between">
@@ -72,19 +70,19 @@ const FeaturedProducts = () => {
             Featured Products
           </h2>
           <p className="text-sm font-normal text-gray-500">
-            Explore our newly featured products
+            Explore our featured products
           </p>
         </div>
         <ExploreDropDown options={exploreOptions} />
       </div>
 
       {/* card */}
-      <div className="mt-4">
+      <div className="mt-4 ">
         {isLoading && <ProductGridSkeleton count={8} />}
         {!isLoading && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
             {(data?.data ?? []).map((product: TProduct) => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard  key={product._id} product={product} />
             ))}
           </div>
         )}
