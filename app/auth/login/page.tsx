@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 }
 import Link from 'next/link';
 import Header from '@/components/layout/header';
+import { login } from '@/api/auth.api';
 
 
 const LoginPage = () => {

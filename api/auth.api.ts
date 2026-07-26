@@ -4,10 +4,10 @@ import { TLoginInput, TRegisterInput } from "@/types/auth.types";
 // login
 export const login = async (data: TLoginInput) => {
   try {
-    const response = await api.post(
-      "/auth/login",
-      data,
-    );
+    const response = await api.post("/auth/login",data);
+    if(response.data?.data?.access_token){
+      localStorage.setItem("access_token", response.data.data.access_token);
+    }
     return response.data;
   } catch (error: any) {
     throw error.response?.data ?? {message: error.message, success: false};

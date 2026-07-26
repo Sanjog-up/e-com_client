@@ -15,7 +15,5 @@ export const RegisterSchema = yup.object({
    retype_pass:yup.string().required().oneOf([yup.ref("password")],"password must match" ),
    phone:yup.string().optional().transform((value) => value?.replace(/[\s-]/g, '')).matches(/^(?:\+977)?9[6-8]\d{8}$/, {
     message:'enter a valid number',
-
    })
-
 })

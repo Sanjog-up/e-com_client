@@ -130,6 +130,5 @@ export const LoginForm = () =>{
                 label={isPending ? 'Signing In..' : 'Sign In'} 
                 type='submit'/>
                         </form>
-</div>
-
+                </div>
                 )}
