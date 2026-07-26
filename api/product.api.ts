@@ -1,14 +1,7 @@
 import axios from "axios";
 import api from ".";
-import { TProduct } from "@/types/product.types";
 
-type ApiResponse<T>= {
-    success: boolean,
-    message: string;
-    data:T
-}
-
-export const getAllProducts = async(params?: Record<string, any>):Promise<ApiResponse<TProduct>> => {
+export const getAllProducts = async(params?: Record<string, any>) => {
     try {
         const response = await api.get("/products", {params});
         return response.data;

@@ -20,7 +20,7 @@ const  ProductList = () => {
 
         {/* map data */}
         {!isLoading && data?.data && data.data.length> 0 && 
-        (<div className='grid grid-cols-5 gap-4'>
+        (<div className='grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-4 '>
           {data?.data.map((product: TProduct) => (
             <ProductCard product={product} key={product._id}
             />))}
