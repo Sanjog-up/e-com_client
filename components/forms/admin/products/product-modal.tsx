@@ -14,8 +14,6 @@ export const ProductModal = () => {
         enabled: !!productId,
         
     })
-
-
     const product: TProduct | undefined = data?.data?.[0]
     if(!productId)
         return null
@@ -35,7 +33,7 @@ export const ProductModal = () => {
                     {isLoading || !product ? (
                         <div className="h-96 animate-pulse bg-gray-100 rounded-lg"/>
                     ):(
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2  gap-6">
                             <div className=" relative aspect-square rounded-lg overflow-hidden bg-gray-100">
                                 <Image 
                                 src={product.cover_image?.path}

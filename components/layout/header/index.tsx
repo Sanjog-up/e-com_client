@@ -10,6 +10,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import { useAuth } from "@/hooks/auth.hook";
 import { IUser } from "@/context/auth.context";
 import { HiOutlineMenu } from "react-icons/hi";
+import { Role } from "@/types/enum.types";
 
 const Navbar = () => {
     const { isAuthenticated, isLoading, logout, user } = useAuth();
@@ -134,8 +135,10 @@ const AuthUser = ({
     isLoading: boolean;
     logout: () => void;
 }) => {
+    const isAdmin = user?.role === "Admin";
     return (
         <div className="flex items-center gap-3">
+            {!isAdmin &&(
             <div className="flex gap-2 items-center ">
                 <Link className="mt-1" title="Wishlist" href={"/wishlist"}>
                     <FaRegHeart className="text-red-400 " size={22} />
@@ -145,7 +148,7 @@ const AuthUser = ({
                     <HiOutlineShoppingBag className="text-indigo-600" size={24} />
                 </Link>
             </div>
-
+            )}
             {/* auth */}
             <div className="flex gap-2 items-center">
                 {/* profile image  */}

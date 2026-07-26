@@ -30,10 +30,8 @@ const AuthProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
         isAuthenticated: !! data?.data, 
         isLoading: isLoading, 
         user: data?.data ?? null, 
-        logout:  () => {
-          console.log('logged out')
-          
-          }}}>
+        logout:  () => logout()
+        }}>
         {children}
     </AuthContext.Provider>
   )
