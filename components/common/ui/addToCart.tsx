@@ -3,31 +3,15 @@
 import { useAddToCart } from "@/hooks/useCart";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import toast from "react-hot-toast";
+import React from "react";
 
-const AddToCartButton = ({
-  productId,
-  quantity = 1,
-}: {
-  productId: string;
-  quantity: number;
-}) => {
+const AddToCartButton = ({productId,quantity = 1,}: { productId: string; quantity?: number;}) => {
   const addToCartMutation = useAddToCart();
-  const handleAddToCart = () => {
-    addToCartMutation.mutate(
-      {
-        productId,
-        quantity,
-      },
-      {
-        onSuccess: ()=> {
-            toast.success("Added to Cart");
-        },
-        onError: (error:any) => {
-            toast.error(error?.message || "Failed to add to cart");
-        }
-      },
-    );
-  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+  e.stopPropagation();
+  addToCartMutation.mutate({productId, quantity});
+  }
   return (
     <button onClick={handleAddToCart}
     disabled={addToCartMutation.isPending}
