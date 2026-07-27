@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/auth.hook";
 import { IUser } from "@/context/auth.context";
 import { HiOutlineMenu } from "react-icons/hi";
 import { Role } from "@/types/enum.types";
+import { useCart } from "@/hooks/useCart";
 
 const Navbar = () => {
     const { isAuthenticated, isLoading, logout, user } = useAuth();
@@ -136,6 +137,8 @@ const AuthUser = ({
     logout: () => void;
 }) => {
     const isAdmin = user?.role === "Admin";
+    const { data: cart} = useCart();
+    const itemCount = cart?.items?.reduce((sum:number, item:any) => sum + item.quantity, 0) ?? 0;
     return (
         <div className="flex items-center gap-3">
             {!isAdmin &&(
@@ -144,8 +147,13 @@ const AuthUser = ({
                     <FaRegHeart className="text-red-400 " size={22} />
                 </Link>
 
-                <Link title="Cart" href={"/cart"}>
+                <Link title="Cart" href={"/cart"} className="relative">
                     <HiOutlineShoppingBag className="text-indigo-600" size={24} />
+                    {itemCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-indigo-500 text-white text-[10px] font-semibold h-4 w-4 flex items-center justify-center">
+                            {itemCount}
+                        </span>
+                    )}
                 </Link>
             </div>
             )}
