@@ -3,7 +3,7 @@
 import { TProduct } from '@/types/product.types'
 import Image from 'next/image'
 import { useProductModal } from '@/context/productmodal.context'
-import AddToCartButton from '@/components/common/ui/addToCart'
+import AddToCartButton from '@/components/common/cart/addToCart'
 
 const ProductCard = ({product}:{product:TProduct}) => {
   const { openProduct } = useProductModal()
