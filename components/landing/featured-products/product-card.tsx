@@ -3,7 +3,7 @@
 import { TProduct } from '@/types/product.types'
 import Image from 'next/image'
 import { useProductModal } from '@/context/productmodal.context'
-import AddToCartButton from '@/components/common/cart/addToCart'
+
 
 const ProductCard = ({product}:{product:TProduct}) => {
   const { openProduct } = useProductModal()
@@ -30,7 +30,7 @@ const ProductCard = ({product}:{product:TProduct}) => {
         <p className='text-lg font-semibold text-gray-300 line-clamp-1' >{product.name}</p>
         <p className='line-clamp-2 leading-5 text-sm text-gray-400'>{product.description}</p>
         <p className='text-indigo-400 font-bold'>Rs.{product.price}</p>
-        <AddToCartButton productId={product._id} />
+
       </div>
     </div>
     </div>
