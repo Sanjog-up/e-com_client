@@ -97,7 +97,8 @@ const Navbar = () => {
 
             {/* auth & cart */}
             <div className="hidden md:block">
-            {isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
+                {isLoading ? 
+            <AuthUserSkeleton/> : isAuthenticated ?  <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}              
             </div>
 
             {/* mobile hamburger toggle */}
@@ -118,7 +119,7 @@ const Navbar = () => {
           <Link href={"/categories"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Categories</Link>
 
           <div className="pt-2 border-t border-zinc-100">
-            {isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
+            {isLoading ?  <AuthUserSkeleton/> : isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
           </div>
         </div>
       )}
@@ -202,5 +203,24 @@ const AuthButtons = () => {
         </div>
     );
 };
+
+const AuthUserSkeleton = () => {
+    return(
+        <div className="flex items-center gap-3 animate-pulse">
+            <div className="flex gap-2 items-center">
+                <div className="h-5 w-5 rounded-full bg-zinc-200"/>
+                <div className="h-6 w-6 rounded-full bg-zinc-200"/>
+            </div>
+
+            <div className="flex gap-2 items-center">
+                <div className="h-14 aspect-square rounded-full bg-zinc-200"/>
+                <div className="flex flex-col gap-1">
+                    <div className="h-4 w-24 rounded bg-zinc-200"/>
+                    <div className="h-3 w-14 rounded bg-zinc-200"/>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export default Navbar;
