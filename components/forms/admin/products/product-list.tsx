@@ -16,28 +16,28 @@ const ProductList = () => {
   const queryClient = useQueryClient();
   const { data, isLoading, } = useQuery({ queryFn: () => getAllProducts(), queryKey: ["products"]});
 
-  const defaultData = [
-    {
-      name: "Product 1",
-      description: "description product ",
-      logo: {
-        path: "/next.svg",
-        public_id: "/next.svg",
-      },
-      created_at: "07-01-2026",
-      updated_at: "07-01-2026",
-    },
-    {
-      name: "Product 2",
-      description: "description product ",
-      logo: {
-        path: "/next.svg",
-        public_id: "/next.svg",
-      },
-      created_at: "07-01-2026",
-      updated_at: "07-01-2026",
-    },
-  ];
+  // const defaultData = [
+  //   {
+  //     name: "Product 1",
+  //     description: "description product ",
+  //     logo: {
+  //       path: "/next.svg",
+  //       public_id: "/next.svg",
+  //     },
+  //     created_at: "07-01-2026",
+  //     updated_at: "07-01-2026",
+  //   },
+  //   {
+  //     name: "Product 2",
+  //     description: "description product ",
+  //     logo: {
+  //       path: "/next.svg",
+  //       public_id: "/next.svg",
+  //     },
+  //     created_at: "07-01-2026",
+  //     updated_at: "07-01-2026",
+  //   },
+  // ];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columnHelper = createColumnHelper<any>();
