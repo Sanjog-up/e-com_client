@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -10,7 +9,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import { useAuth } from "@/hooks/auth.hook";
 import { IUser } from "@/context/auth.context";
 import { HiOutlineMenu } from "react-icons/hi";
-import { Role } from "@/types/enum.types";
+import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
 
 const Navbar = () => {
@@ -138,7 +137,7 @@ const AuthUser = ({
 }) => {
     const isAdmin = user?.role === "Admin";
     const { data: cart} = useCart();
-    const itemCount = cart?.items?.reduce((sum:number, item:any) => sum + item.quantity, 0) ?? 0;
+    const itemCount = cart?.cart?.items?.reduce((sum:number, item:any) => sum + item.quantity, 0) ?? 0;
     return (
         <div className="flex items-center gap-3">
             {!isAdmin &&(
