@@ -11,6 +11,7 @@ import ProductGridSkeleton from "@/components/sort.exploreall/productgrid";
 import Link from "next/link";
 import { MdOutlineCloudOff } from "react-icons/md";
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SORT_OPTIONS = [
   { label: "Default", value: "" },
@@ -24,7 +25,8 @@ export default function ProductsPage() {
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort") ?? "";
   const category = searchParams.get("category") ?? "";
-  const search = searchParams.get("search") ?? searchParams.get("query") ?? "";
+  const search = searchParams.get("query") ?? searchParams.get("query") ?? "";
+  const router = useRouter();
 
   const [searchInput , setSearchInput] = useState(search);
 
@@ -37,7 +39,6 @@ export default function ProductsPage() {
     if (sort) params.sort = sort;
     if (category) params.category = category;
     if(search) params.query = search;
-    params.limit = "20";
     return params;
   }, [sort, category, search]);
 
@@ -82,9 +83,8 @@ export default function ProductsPage() {
     if(searchInput.trim()) params.set("query", searchInput.trim());
     if(sort) params.set("sort", sort);
     if(category) params.set("category", category);
-    window.location.href = params.toString()
-    ? `/products?${params.toString()}`
-    : "/products";
+    const qs = params.toString();
+    router.push(qs ? `/products?${qs}` : "/products")
   }
 
 
@@ -113,7 +113,7 @@ export default function ProductsPage() {
             value= {searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search Products"
-            className="flex-1 sm:w-64 px-3 py-2 rounded-md border border-gray-200 bg-white text-sm text-gray-800 focus::outline-none focus:ring-2 focus:ring-indigo-300"
+            className="flex-1 sm:w-64 px-3 py-2 rounded-md border border-gray-200 bg-white text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300"
             />
             <button className="px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700"
             type="submit"
