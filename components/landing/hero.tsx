@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import Button from '../common/ui/button'
 
 const Hero = () => {
   return (
@@ -21,10 +22,9 @@ const Hero = () => {
         <p className='text-[14px] max-w-md text-center mt-4'>Quality products, fair prices, and fast delivery. Explore our latest collection.</p>
           {/* button */}
           <div className='mt-6 w-50 mx-auto'>
-            <Link
-            onClick={() => (window.location.href = "/products")}
-            label='Shop Now'
-              />
+            <Link href={"/products"}>
+            <Button label='Shop Now'/>
+            </Link>
           </div>
       </div>
     </div>
