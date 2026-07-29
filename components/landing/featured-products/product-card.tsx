@@ -29,7 +29,6 @@ const ProductCard = ({product}:{product:TProduct}) => {
       <div className='p-3 bg-blue-900'>
         <p className='text-lg font-semibold text-gray-300 line-clamp-1' >{product.name}</p>
         <p className='line-clamp-2 leading-5 text-sm text-gray-400'>{product.description}</p>
-        <p className='text-indigo-400 font-bold'>Rs.{product.price}</p>
 
       </div>
     </div>

@@ -24,14 +24,8 @@ const Navbar = () => {
         <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors gap-4">
             
             <Link href={"/"} 
-            className="whitespace-nowrap text-lg shrink-0 font-serif">
-              <div>
-              <Image
-              src={"/next.svg"}
-              alt="logo"
-              height={100}
-              width={100}/>
-              </div>Grey Matter </Link>  
+            className="whitespace-nowrap text-3xl shrink-0 font-serif text-blue-700">
+              Grey Matter </Link>  
 
             {/* desktop nav - hidden below md breakpoint */}
             <div className="hidden  md:flex items-center">
