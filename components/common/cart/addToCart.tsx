@@ -4,13 +4,21 @@ import { useAddToCart } from "@/hooks/useCart";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import toast from "react-hot-toast";
 import React from "react";
+import { error } from "console";
 
 const AddToCartButton = ({productId,quantity = 1,}: { productId: string; quantity?: number;}) => {
   const addToCartMutation = useAddToCart();
 
   const handleAddToCart = (e: React.MouseEvent) => {
   e.stopPropagation();
-  addToCartMutation.mutate({productId, quantity});
+  addToCartMutation.mutate({productId, quantity},{
+    onSuccess: () => toast.success("Added to cart"),
+  
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || "Couldn't add to cart";
+      toast.error(message);
+    }}
+  );
   }
   return (
     <button onClick={handleAddToCart}

@@ -5,6 +5,7 @@ import { TCartItem } from "@/types/cart.types";
 import { useUpdateCartItem, useRemoveFromCart } from "@/hooks/useCart";
 import { HiOutlineTrash, HiMinus, HiPlus } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 const CartItemRow =  ({item}: {item: TCartItem}) => {
     const { product, quantity } = item;
@@ -21,7 +22,14 @@ const CartItemRow =  ({item}: {item: TCartItem}) => {
     const commitQuantity = (nextQty: number) => {
         if(debounceRef.current) clearTimeout(debounceRef.current)
             debounceRef.current = setTimeout(() => {
-        updateCartItem({ productId: product._id, quantity: nextQty })
+        updateCartItem({ productId: product._id, quantity: nextQty },
+            {
+                onError: () => {
+                    toast.error("Couldn't update quantity");
+                    setLocalQuantity(quantity);
+                }
+            }
+        )
     }, 400)
     }
 
@@ -39,7 +47,10 @@ const CartItemRow =  ({item}: {item: TCartItem}) => {
     }
 
     const handleRemove = () => {
-        removeFromCart(product._id)
+        removeFromCart(product._id, {
+            onSuccess: () => toast.success(`Removed ${product.name} from cart`),
+            onError: () => toast.error("Couldn't remove item"),
+        })
     }
 
     const subtotal = product.price * localQuantity

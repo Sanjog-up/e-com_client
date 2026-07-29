@@ -42,7 +42,7 @@ export default function RootLayout({
             </ProductModalProvider>            
             </AuthProvider>
             </ReactQueryProvider>
-        <Toaster />
+        <Toaster toastOptions={{duration: 2500}} />
       </body>
     </html>
   );
