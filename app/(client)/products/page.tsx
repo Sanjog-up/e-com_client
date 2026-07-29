@@ -11,8 +11,6 @@ import ProductGridSkeleton from "@/components/sort.exploreall/productgrid";
 import Link from "next/link";
 import { MdOutlineCloudOff } from "react-icons/md";
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/router";
-import { title } from "process";
 
 const SORT_OPTIONS = [
   { label: "Default", value: "" },
@@ -26,10 +24,9 @@ export default function ProductsPage() {
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort") ?? "";
   const category = searchParams.get("category") ?? "";
-  const search = searchParams.get("search") ?? "";
+  const search = searchParams.get("search") ?? searchParams.get("query") ?? "";
 
   const [searchInput , setSearchInput] = useState(search);
-  const router = useRouter();
 
   useEffect(() => {
     setSearchInput(search)
@@ -39,7 +36,8 @@ export default function ProductsPage() {
     const params: Record<string, string> = {};
     if (sort) params.sort = sort;
     if (category) params.category = category;
-    if(search) params.search = search;
+    if(search) params.query = search;
+    params.limit = "20";
     return params;
   }, [sort, category, search]);
 
@@ -56,6 +54,11 @@ export default function ProductsPage() {
   const categories: TCategory[] = categoriesData?.data ?? [];
   const products: TProduct[] = data?.data ?? [];
   const activeCategory = categories.find((c) => c._id === category);
+  const pageTitle = activeCategory
+  ? activeCategory.name
+  : search
+    ? `Results for “${search}”`
+    : "All Products";
 
   const buildHref = (updates: { sort?: string; category?: string; search?: string }) => {
     const params = new URLSearchParams();
@@ -72,9 +75,16 @@ export default function ProductsPage() {
     return qs ? `/products?${qs}` : "/products";
   };
 
+
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(buildHref({ search: searchInput.trim()}));
+    const params = new URLSearchParams();
+    if(searchInput.trim()) params.set("query", searchInput.trim());
+    if(sort) params.set("sort", sort);
+    if(category) params.set("category", category);
+    window.location.href = params.toString()
+    ? `/products?${params.toString()}`
+    : "/products";
   }
 
 
@@ -87,7 +97,7 @@ export default function ProductsPage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
             <h1 className="text-2xl font-bold text-gray-800 tracking-wider">
-              {title}
+              {pageTitle}
             </h1>
             <p className="text-sm text-gray-500 mt-1">
               {isLoading
@@ -105,9 +115,10 @@ export default function ProductsPage() {
             placeholder="Search Products"
             className="flex-1 sm:w-64 px-3 py-2 rounded-md border border-gray-200 bg-white text-sm text-gray-800 focus::outline-none focus:ring-2 focus:ring-indigo-300"
             />
-            <button className="px-4 py-2 rounded-md bg-indigo-600 text-white twxt-sm font-medium hover:bg-indigo-700"
+            <button className="px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700"
             type="submit"
-            >Seach</button>
+            
+            >Search</button>
           </form>
           </div>
 
