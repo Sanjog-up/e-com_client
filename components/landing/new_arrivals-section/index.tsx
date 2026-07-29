@@ -15,7 +15,7 @@ const NewArrivals = () => {
     });
     const exploreOptions = useExploreOptions();
     return (
-        <div className='pt-10 py-4 bg-blue-100 min-h-60 px-32 '>
+        <div className='pt-10 py-4 bg-blue-100 min-h-60 px-4 sm:px-8 lg:px-16 xl:px-24 '>
             {/* heading */}
             <div className='flex justify-between '>
                 {/* left section */}

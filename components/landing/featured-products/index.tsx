@@ -61,7 +61,7 @@ const FeaturedProducts = () => {
   const exploreOptions = useExploreOptions();
 
   return (
-    <div className="pt-10 pb-4 min-h-60 px-32 bg-blue-100">
+    <div className="pt-10 pb-4 min-h-60  px-4 sm:px-8 lg:px-16 xl:px-24  bg-blue-100">
       {/* heading */}
       <div className="flex justify-between">
         {/* left section */}

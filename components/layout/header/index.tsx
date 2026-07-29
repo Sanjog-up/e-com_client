@@ -51,11 +51,11 @@ const Navbar = () => {
             About Us
             </Link>
 
-            <Link href={"/contact"} 
+            <Link href={"/contact-us"} 
             className="italic font-serif  font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap">
             Contact Us
             </Link>  
-            </section>        
+            </section>
           
 
           <section 
@@ -115,8 +115,8 @@ const Navbar = () => {
           <Link href={"/"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Home</Link>
           <Link href={"/products"} className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Products</Link>
           <Link href={"/about"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">About Us</Link>
-          <Link href={"/contact"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Contact Us</Link>
-          <Link href={"/categories"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Categories</Link>
+          <Link href={"/contact-us"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Contact Us</Link>
+          <div className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Categories</div>
 
           <div className="pt-2 border-t border-zinc-100">
             {isLoading ?  <AuthUserSkeleton/> : isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
@@ -143,7 +143,7 @@ const AuthUser = ({
         <div className="flex items-center gap-3">
             {!isAdmin &&(
             <div className="flex gap-2 items-center ">
-                <Link className="mt-1" title="Wishlist" href={"/wishlist"}>
+                <Link className="mt-1" title="Wishlist" href={"/wishlists"}>
                     <FaRegHeart className="text-red-400 " size={22} />
                 </Link>
 

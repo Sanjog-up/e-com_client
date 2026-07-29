@@ -5,8 +5,9 @@ interface IButtonProps {
     type?: 'reset' | 'submit' | 'button' ;
      isLoading?: boolean;
   disabled?: boolean;
+
 }
-const Button = ({ label= 'Button', type = 'button', isLoading, disabled, ...rest }: IButtonProps) => {
+const Button = ({ label= 'Button', type = 'button', isLoading, disabled, ...rest}: IButtonProps) => {
   return (
     <div>
       <button type={type}

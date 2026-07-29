@@ -16,7 +16,7 @@ const ProductCard = ({product}:{product:TProduct}) => {
     className='text-left w-full'
     >
 
-      <div className='flex flex-col borderborder-indigo-100 rounded-sm overflow-hidden bg-black'>
+      <div className='flex flex-col border border-indigo-100 rounded-sm overflow-hidden bg-white'>
       <div className='relative w-full h-56 aspect-square overflow-hidden'>
         <Image
         src={product.cover_image.path}
