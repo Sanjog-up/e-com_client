@@ -29,6 +29,12 @@ export const register = async (data: TRegisterInput) => {
 
 // get profile
 export const getProfile = async () => {
+  const token = typeof window !== "undefined" 
+  ? localStorage.getItem("access_token")
+  : null;
+  if(!token) {
+    return { data: null, success: true};
+  }
   try {
     const response = await api.get("/auth/me")
     return response.data;

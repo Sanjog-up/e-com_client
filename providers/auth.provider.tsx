@@ -2,7 +2,7 @@
 
 import { getProfile, logoutApi } from '@/api/auth.api'
 import AuthContext from '@/context/auth.context'
-import { QueryClient, useQueries, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 
 const AuthProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
@@ -15,7 +15,6 @@ const AuthProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
 
 
     })
-    console.log('auth provider', data?.data)
     
     const logout = async() => {
       try{
