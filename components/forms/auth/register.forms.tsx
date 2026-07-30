@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TRegisterInput } from "@/types/auth.types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { register as registerUser } from "@/api/auth.api";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -65,6 +65,7 @@ const RegisterForm = () => {
     },
     resolver: yupResolver(RegisterSchema),
   });
+
 
   // react query
   const { mutate, isPending } = useMutation({

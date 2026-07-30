@@ -20,7 +20,10 @@ export const register = async (data: TRegisterInput) => {
     const response = await api.post(
       "/auth/register",
       data,
-    )
+    );
+    if(response.data?.data?.token){
+      localStorage.setItem("access_token", response.data.data.token);
+    }
     return response.data
   } catch (error:any) {
     throw error.response?.data ?? {message: error.message, success: false};
