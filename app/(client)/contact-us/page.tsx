@@ -1,7 +1,13 @@
+'use client'
+
 import Footer from '@/components/layout/footer'
 import Button from '@/components/common/ui/button'
+import Input from '@/components/common/ui/input'
 import { HiOutlineMapPin, HiOutlinePhone, HiOutlineEnvelope, HiOutlineClock } from 'react-icons/hi2'
-import { FaAsterisk } from 'react-icons/fa'
+import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
+import { sendContactMessage } from '@/api/contact.api'
+import toast from 'react-hot-toast'
 
 const contactDetails = [
   {
@@ -26,7 +32,37 @@ const contactDetails = [
   },
 ]
 
+type TContactInput = {
+  name: string
+  email: string
+  message: string
+}
+
 const Contacts = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<TContactInput>({
+    defaultValues: { name: '', email: '', message: '' },
+  })
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: sendContactMessage,
+    onSuccess: (response) => {
+      toast.success(response?.message ?? 'Message sent!')
+      reset()
+    },
+    onError: (error: any) => {
+      toast.error(error?.message ?? 'Failed to send message')
+    },
+  })
+
+  const onSubmit = (data: TContactInput) => {
+    mutate(data)
+  }
+
   return (
     <main className='w-full'>
       {/* hero banner */}
@@ -42,58 +78,44 @@ const Contacts = () => {
         {/* form */}
         <div className='md:col-span-3 bg-white rounded-sm p-6 sm:p-8 shadow-sm border border-blue-100'>
           <h2 className='text-xl font-serif tracking-widest uppercase text-zinc-800 mb-6'>Send a Message</h2>
-          <form className='flex flex-col gap-5'>
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
-              <div className='w-full flex flex-col gap-1'>
-                <div className='flex'>
-                  <label className='text-[15px] font-serif' htmlFor='name'>Name</label>
-                  <FaAsterisk size={8} className='text-black-400 ml-1' />
-                </div>
-                <input
-                  id='name'
-                  type='text'
-                  placeholder='Your full name'
-                  className='w-full border-[1.5px] tracking-wide font-extralight border-blue-300 focus:outline-blue-900 px-2 py-2 rounded-sm'
-                />
-              </div>
-              <div className='w-full flex flex-col gap-1'>
-                <div className='flex'>
-                  <label className='text-[15px] font-serif' htmlFor='email'>Email</label>
-                  <FaAsterisk size={8} className='text-black-400 ml-1' />
-                </div>
-                <input
-                  id='email'
-                  type='email'
-                  placeholder='you@example.com'
-                  className='w-full border-[1.5px] tracking-wide font-extralight border-blue-300 focus:outline-blue-900 px-2 py-2 rounded-sm'
-                />
-              </div>
-            </div>
-
-            <div className='w-full flex flex-col gap-1'>
-              <label className='text-[15px] font-serif' htmlFor='subject'>Subject</label>
-              <input
-                id='subject'
-                type='text'
-                placeholder='What is this about?'
-                className='w-full border-[1.5px] tracking-wide font-extralight border-blue-300 focus:outline-blue-900 px-2 py-2 rounded-sm'
+              <Input
+                register={register}
+                label="Name"
+                type="text"
+                placeholder="Your full name"
+                id="name"
+                name="name"
+                required
+                error={errors?.name?.message}
+              />
+              <Input
+                register={register}
+                label="Email"
+                type="email"
+                placeholder="you@example.com"
+                id="email"
+                name="email"
+                required
+                error={errors?.email?.message}
               />
             </div>
 
-            <div className='w-full flex flex-col gap-1'>
-              <div className='flex'>
-                <label className='text-[15px] font-serif' htmlFor='message'>Message</label>
-                <FaAsterisk size={8} className='text-black-400 ml-1' />
-              </div>
-              <textarea
-                id='message'
-                placeholder='Write your message here...'
-                className='w-full text-black font-normal border-[1.5px] min-h-40 tracking-widest border-blue-300 focus:outline-blue-900 px-2 py-2 rounded-sm'
-              />
-            </div>
+            <Input
+              register={register}
+              label="Message"
+              type="text"
+              multiline
+              placeholder="Write your message here..."
+              id="message"
+              name="message"
+              required
+              error={errors?.message?.message}
+            />
 
             <div className='w-full sm:w-48'>
-              <Button label='Send Message' type='button' />
+              <Button label={isPending ? "Sending..." : "Send Message"} type="submit" />
             </div>
           </form>
         </div>

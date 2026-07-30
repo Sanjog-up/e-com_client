@@ -51,6 +51,8 @@ const RegisterForm = () => {
   //     }
 
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const {
     register,
     handleSubmit,
@@ -73,6 +75,7 @@ const RegisterForm = () => {
     onSuccess: (response) => {
       console.log("on Success", response);
       toast.success(response?.message ?? "Register Success!!");
+      queryClient.invalidateQueries({ queryKey:["me"]})
       router.replace("/");
     },
     onError: (error) => {
