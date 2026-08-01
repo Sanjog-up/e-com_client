@@ -1,7 +1,7 @@
 import { TToggleWishlistResponse, TWishlistResponse } from "@/types/wishlist.types";
 import api from ".";
 
-export const getWishlist = async() => {
+export const getWishlist = async(): Promise<TWishlistResponse> => {
     try {
         const response = await api.get("/wishlist");
         return response.data.data;
@@ -10,7 +10,7 @@ export const getWishlist = async() => {
     }
 }
 
-export const toggleWishlist = async(productId:string) =>{
+export const toggleWishlist = async(productId:string): Promise<TToggleWishlistResponse> =>{
     try {
         const response = await api.patch(`/wishlist/${productId}`);
         return response.data.data;
@@ -19,7 +19,7 @@ export const toggleWishlist = async(productId:string) =>{
     }
 };
 
-export const clearWishlist = async() =>{
+export const clearWishlist = async(): Promise<null> =>{
     try {
         const response = await api.delete(`/wishlist`);
         return response.data.data;
