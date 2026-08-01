@@ -5,9 +5,7 @@ import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import toast from "react-hot-toast";
 import React from "react";
 
-
-
-const WishlistButton = ({ productId, className ="" }: {
+const WishlistButton = ({ productId, className = "" }: {
     productId: string;
     className?: string;
 })  => {
@@ -18,7 +16,7 @@ const WishlistButton = ({ productId, className ="" }: {
         e.stopPropagation();
         toggleWishlistMuatation.mutate(productId, {
             onSuccess: (data) => {
-                toast.success(data.wishListed ? "Added to wishlist" : "Removed from wishlist");
+                toast.success(data.wishlisted ? "Added to wishlist" : "Removed from wishlist");
             },
             onError: (error: any) => {
                 const message = error?.message || "Something went wrong";

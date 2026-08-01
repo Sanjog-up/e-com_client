@@ -1,7 +1,7 @@
-import React from "react";
 import PageTitle from "@/components/forms/admin/page-title";
 import BrandList from "@/components/forms/admin/brands/brand-list";
-import BrandForm from "@/components/forms/admin/brands/brandform";
+
+export const dynamic = "force-dynamic";
 const Brands = () => {
   return (
     <main className="h-full">

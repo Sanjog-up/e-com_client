@@ -2,6 +2,7 @@ import PageTitle from "@/components/forms/admin/page-title";
 import CategoryList from "@/components/forms/admin/categories/category-list";
 import React from "react";
 
+export const dynamic = "force-dynamic";
 const Categories = () => {
   return (
     <main>
