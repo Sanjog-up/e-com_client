@@ -1,6 +1,8 @@
 import React from "react";
 import PageTitle from "@/components/forms/admin/page-title";
-import Header from "@/components/layout/header";
+
+export const dynamic = "force-dynamic";
+
 const Page = () => {
   return (
     <main>

@@ -2,6 +2,7 @@ import BrandForm from "@/components/forms/admin/brands/brandform";
 import PageTitle from "@/components/forms/admin/page-title";
 import React from "react";
 
+export const dynamic = "force-dynamic";
 const CreateBrandPage = () => {
   return (
     <main className="h-full">

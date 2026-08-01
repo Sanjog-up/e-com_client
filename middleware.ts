@@ -1,17 +1,36 @@
 // middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { Role } from './types/enum.types';
+import { jwtDecode } from 'jwt-decode';
 
+type TTokenPayload = {
+    _id: string;
+    email: string;
+    role: Role;
+    exp: number;
+}
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get('token')?.value;
+  const token = req.cookies.get('access_token')?.value;
+  const { pathname } = req.nextUrl;
 
-  if (req.nextUrl.pathname.startsWith('/admin')) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/auth/login', req.url));
-    }
-    // if you need role checks here too, you'd need to decode the JWT
-    // (jwtDecode, not verify — middleware runs on edge runtime)
+  if(pathname.startsWith('/admin')){
+    return NextResponse.next();
   }
+
+  if(!token){
+    return NextResponse.redirect(new URL('/auth/login', req.url));
+  }
+
+  try{
+    const decoded = jwtDecode<TTokenPayload>(token);
+
+    if(decoded.exp * 1000 < Date.now()){
+        return NextResponse.redirect(new URL('/auth/login', req.url));
+    }
+  }catch(err){
+    return NextResponse.redirect(new URL('/auth/login', req.url));
+}
 
   return NextResponse.next();
 }

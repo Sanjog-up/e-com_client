@@ -2,6 +2,7 @@ import PageTitle from "@/components/forms/admin/page-title";
 import CategoryForm from "@/components/forms/admin/categories/categoryform";
 import React from "react";
 
+export const dynamic = "force-dynamic";
 const CategoryCreatePage = () => {
   return (
     <main className="h-full">
