@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 const WishList = () => {
   const { data, isLoading, isError } = useWishlist()
   const { mutate: clearWishlist, isPending: isClearing } = useClearWishlist()
-  const wishlist = data?.wishList
+  const wishlist = data?.wishlist
 
   if (isLoading) {
     return (

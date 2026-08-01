@@ -9,7 +9,7 @@ import { HiOutlineTrash, HiOutlineShoppingBag } from "react-icons/hi2";
 import toast from "react-hot-toast";
 
 const WishlistItemRow = ({ item }: { item: TWishlistItem }) => {
-  const product = item.product_id;
+  const product = item.productId;
   const { mutate: toggleWishlist, isPending: isRemoving } = useToggleWishlist();
   const { mutate: addToCart, isPending: isAdding } = useAddToCart();
 

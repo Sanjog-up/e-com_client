@@ -36,5 +36,5 @@ export const useClearWishlist = () => {
 
 export const useIsWishlisted = (productId: string) => {
     const { data } = useWishlist();
-    return !!data?.wishList?.some((item) => item.product_id?._id === productId);
+    return !!data?.wishlist?.some((item) => item.productId?._id === productId);
 };

@@ -3,14 +3,14 @@ import { TProduct } from "./product.types";
 export type TWishlistItem = {
     _id: string,
     user: string,
-    product_id: TProduct;
+    productId: TProduct;
     createdAt: string,
     updatedAt: string,
 }
 
 export type TWishlistResponse = {
     wishListCount : number;
-    wishList: TWishlistItem[];
+    wishlist: TWishlistItem[];
 };
 
 export type TToggleWishlistResponse = {

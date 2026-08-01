@@ -6,6 +6,7 @@ import { getProductById } from "@/api/product.api"
 import { TProduct } from "@/types/product.types"
 import { ProductModalProvider, useProductModal } from "@/context/productmodal.context"
 import AddToCartButton from "@/components/common/cart/addToCart"
+import WishlistButton from "@/components/common/ui/wishlist-button"
 
 export const ProductModal = () => {
     const { productId, closeProduct } =  useProductModal()
@@ -44,9 +45,13 @@ export const ProductModal = () => {
                                 className="object-cover"/>
                             </div>
                             <div>
+                                <div className="flex items-center gap-2">
                                 <h2 className="text-xl font-serif">{product.name}</h2>
+                                    <WishlistButton productId={product._id} />
+                                </div>
                                 <p className="mt-1 font-bold">Rs. {product.price}</p>
                                 <p className="mt-3 text-sm text-gray-500">{product.description}</p>
+                                
                                 <AddToCartButton productId={product._id} />
 
                             </div>

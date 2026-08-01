@@ -3,7 +3,7 @@
 import { TProduct } from '@/types/product.types'
 import Image from 'next/image'
 import { useProductModal } from '@/context/productmodal.context'
-
+import WishlistButton from '@/components/common/ui/wishlist-button'
 
 const ProductCard = ({product}:{product:TProduct}) => {
   const { openProduct } = useProductModal()
@@ -24,7 +24,8 @@ const ProductCard = ({product}:{product:TProduct}) => {
         fill
         className='rounded-sm object-cover'
         />
-
+        <WishlistButton productId={product._id} 
+        className='absolute top-2 right-2 z-10 bg-white/10 backdrop:blur-sm hover:bg-white' />
       </div>
       <div className='p-3 bg-blue-900'>
         <p className='text-lg font-semibold text-gray-300 line-clamp-1' >{product.name}</p>
