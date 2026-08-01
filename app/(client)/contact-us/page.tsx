@@ -23,7 +23,7 @@ const contactDetails = [
   {
     icon: HiOutlineEnvelope,
     title: 'Email',
-    lines: ['sanjogm940.gmail.com'],
+    lines: ['sanjogm940@gmail.com'],
   },
   {
     icon: HiOutlineClock,
