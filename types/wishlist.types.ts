@@ -14,7 +14,7 @@ export type TWishlistResponse = {
 };
 
 export type TToggleWishlistResponse = {
-    wishListes: boolean,
+    wishListed: boolean,
     productId: string,
     wishlistItem?: string, 
 }
