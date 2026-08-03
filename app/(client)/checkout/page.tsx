@@ -40,7 +40,7 @@ const Checkout = () => {
           if(res.paymentUrl){
             window.location.href = res.paymentUrl
           } else if(res.order){
-            router.push(`orders/${res.order._id}`)
+            router.push(`/orders/${res.order._id}`)
           }
         }
       }
@@ -84,7 +84,7 @@ const Checkout = () => {
           </label>
 
           <label className="flex gap-2 text-sm items-center">
-            <input type='radio' value="khalti" {...register('paymentMethod')} />
+            <input type='radio' value="Khalti" {...register('paymentMethod')} />
             Khalti
           </label>
         </div>
@@ -102,7 +102,7 @@ const Checkout = () => {
       <div>
         <h2>Order Summary</h2>
         {cart.items.map((item)=> (
-          <div>
+          <div key={item._id}>
             <span>{item.product.name} x {item.quantity}</span>
             <span>Rs. {(item.product.price * item.quantity).toLocaleString()}</span>
           </div>
