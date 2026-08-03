@@ -31,7 +31,7 @@ export const getOrderById = async (id: string): Promise<{ order: TOrder }> => {
     }
 }   
 
-export const getOrdersById = async (): Promise<{ orders: TOrder[] }> => {
+export const getMyOrders = async (): Promise<{ orders: TOrder[] }> => {
     try {
         const response = await api.get('/orders/my-orders');
         return response.data.data;
