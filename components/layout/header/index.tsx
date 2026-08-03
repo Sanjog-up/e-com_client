@@ -14,10 +14,7 @@ import { useCart } from "@/hooks/useCart";
 
 const Navbar = () => {
     const { isAuthenticated, isLoading, logout, user } = useAuth();
-    const [isMenDropdownOpen, setIsMenDropdownOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const onMouseEnter = () => {setIsMenDropdownOpen(true)};
-  const onMouseLeave = () => { setIsMenDropdownOpen(false)};
 
     return (
         <header className="sticky min-w-fit top-0 z-50 border-b border-zinc-200 bg-white">
@@ -51,43 +48,7 @@ const Navbar = () => {
             </Link>  
             </section>
           
-
-          <section 
-            onMouseEnter={onMouseEnter} 
-            onMouseLeave={onMouseLeave} 
-            className = "relative shrink-0">
-            <ol className="italic font-serif font-semibold text-blue-800 px-2 shrink-0 py-2 cursor-pointer hover:bg-blue-200 rounded-xl">
-              Categories
-              </ol>
-
-            {isMenDropdownOpen &&(
-            <ul
-            style={{
-              listStylePosition: "inside",
-            }}
-           className="absolute left-0 top-full bg-white border-t border-zinc-200 shadow-lg rounded-xl w-full py-2 z-50 flex flex-col min-w-45"
-           >
-            <li >
-            <Link href="/men/t-shirts" 
-            className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100 whitespace-nowrap">
-            T-Shirts
-          </Link>
-          </li>
-          <li >
-          <Link href="/men/jackets" 
-          className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
-            Jackets
-          </Link>
-          </li>
-          <li >
-          <Link href="/men/pants" className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
-            Pants
-          </Link>
-          </li>
-          </ul>
-          )}
-            </section>
-            </div>
+          </div>
 
             {/* auth & cart */}
             <div className="hidden md:block">

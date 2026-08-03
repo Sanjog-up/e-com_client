@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import toast, { Toaster } from "react-hot-toast";
 import ReactQueryProvider from "@/providers/react.query.provider";
@@ -18,6 +18,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title: "Grey Matter | Shop the Best",
   description: "Discover featured products, new arrivals, and more at Grey Matter.",
@@ -31,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} min-h-screen h-full antialiased tracking-wider`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} min-h-screen h-full antialiased tracking-wider`}
     >
       <body className="h-screen min-h-full flex flex-col">
         <ReactQueryProvider>

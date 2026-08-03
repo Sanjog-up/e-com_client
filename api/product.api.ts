@@ -10,11 +10,23 @@ export const getAllProducts = async(params?: Record<string, any>) => {
     }
 }
 
-export const getFeaturedProducts = async () => 
-    getAllProducts({ sort : "-soldCount", limit: 8});
+export const getFeaturedProducts = async () => {
+    try {
+        const response = await api.get("/products/featured");
+        return response.data;
+    } catch (error: any) {
+        throw error?.response?.data;
+    }
+}
 
-export const getNewArrivals = async() => 
-    getAllProducts({ sort: "-createdAt", limit:8});
+export const getNewArrivals = async() => {
+    try {
+        const response = await api.get("/products/new-arrivals");
+        return response.data;
+    } catch (error: any) {
+        throw error?.response?.data;
+    }
+}
 
 export const getProductById = async(id: string)=> {
     try {
