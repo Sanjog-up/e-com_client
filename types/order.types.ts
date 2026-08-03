@@ -8,7 +8,7 @@ export type TShippingAddress = {
     city: string;
 };
 
-export type TOrderTinout = {
+export type TOrderItem = {
     product: string;
     quantity: number;
     price: number;
@@ -18,3 +18,25 @@ export type TOrderTinout = {
         public_id: string;
     }
 }
+
+export type TOrder = {
+    user: string;
+    _id: string;
+    items: TOrderItem[];
+    shippingAddress: TShippingAddress;
+    paymentMethod: 'COD' | 'Khalti';
+    paymentStatus: 'Pending' | 'Paid' | 'Failed';
+    khaltiPidx?: string;
+    totalPrice: number;
+    status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type TCheckoutInput = yup.InferType<typeof orderSchema>;
+
+export type TCreateOrderResponse = {
+    order?: TOrder;
+    paymentUrl?: string;
+    orderId?: string;
+};
