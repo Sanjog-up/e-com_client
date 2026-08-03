@@ -18,14 +18,14 @@ export const useVerifyKhaltiPayment = () => {
     return useMutation({
         mutationFn: verifyKhaltiPayment,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['orders'] });
+            queryClient.invalidateQueries({ queryKey: ['cart'] });
         },
     });
 } 
 
 export const useMyOrders = () => {
     return useQuery({
-        queryKey: ['orders'],
+        queryKey: ['cart'],
         queryFn: getMyOrders,
     });
 };
