@@ -11,10 +11,9 @@ const EditCategoryPage = () => {
   const { id } = useParams<{id: string}>();
 
   const { data: category, isLoading, error } = useQuery({
-    
-     queryKey: ["Category", id],
+    queryKey: ["Category", id],
     queryFn: () => getCategoryById(id as string),
-     enabled: !!id && id!== "undefined", 
+    enabled: !!id && id!== "undefined", 
   });
 
   if (isLoading) {

@@ -130,7 +130,7 @@ columnHelper.accessor((row) => row.featured, {
       id: "_",
       cell: (info) => (
         <ActionButtons
-        editLink={`/admin/products/${info.row.original._id}`}
+        editLink={`/admin/products/${info.row.original._id}/edit`}
         onDelete={async() => {
           try {
             await api.delete(`/products/${info.row.original._id}`);

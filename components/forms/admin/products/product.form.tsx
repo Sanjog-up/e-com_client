@@ -13,6 +13,7 @@ import { getAllBrands } from "@/api/brand.api";
 import api from "@/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Select from "@/components/common/ui/select";
+import toast from "react-hot-toast";
 
 interface ProductFormProps {
   defaultValues?: Partial <TProductInput> | null;
@@ -81,6 +82,9 @@ useEffect(()=> {
     onSuccess:()=> {
       queryClient.invalidateQueries({ queryKey: ["products"]});
       router.push("/admin/products");
+    },
+    onError: (err:any) => {
+      toast.error(err?.respnse?.data?.message ?? 'Failed to update product')
     }
   })
 
