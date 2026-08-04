@@ -53,5 +53,9 @@ export const logoutApi = async() => {
     return response.data;
   } catch (error:any) {
     throw error.response?.data ?? {message: error.message, success: false};
+  } finally{
+    if(typeof window !== 'undefined'){
+      localStorage.removeItem("access_token");
+    }
   }
 }

@@ -41,10 +41,15 @@ export const LoginForm = () =>{
     const { mutate, isPending } = useMutation({
         mutationFn: login,
         onSuccess: (response) => {
-            toast.success(response?.message ?? 'Login Success!!')
-            queryClient.invalidateQueries({ queryKey: ['me']})
+            toast.success(response?.message ?? 'Login Success!!');
 
-        const role = response?.data?.user?.role
+            if(response?.data?.user){
+                queryClient.setQueryData(["me"],{
+                    data: response.data.user,
+                    success: true,
+                });
+            } 
+            const role = response?.data?.user?.role
             if(role === Role.ADMIN  || role === Role.SUPER_ADMIN){
                 router.replace('/admin')
             } else {

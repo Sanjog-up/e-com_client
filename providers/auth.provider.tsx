@@ -10,7 +10,7 @@ const AuthProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
     const {data, isLoading} = useQuery({
         queryFn: getProfile,
         queryKey: ['me'],
-        staleTime: 5* 60* 1000,
+        staleTime: 0,
         retry: false,
 
 
