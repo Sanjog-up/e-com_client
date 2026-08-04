@@ -25,7 +25,7 @@ export const useVerifyKhaltiPayment = () => {
 
 export const useMyOrders = () => {
     return useQuery({
-        queryKey: ['cart'],
+        queryKey: ['orders'],
         queryFn: getMyOrders,
     });
 };
