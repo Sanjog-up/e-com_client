@@ -3,16 +3,14 @@
 import Button from '@/components/common/ui/button';
 import Input from '@/components/common/ui/input';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { CgPassword } from 'react-icons/cg';
 import {LoginSchema} from '@/schema/auth.schema';
-import axios from 'axios';
 import { TLoginInput } from '@/types/auth.types';
 import { login } from '@/api/auth.api';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast'
+import { Role } from '@/types/enum.types';
 
 export const LoginForm = () =>{
     // const[email,setEmail]= useState('')
@@ -28,6 +26,7 @@ export const LoginForm = () =>{
     //     setFormData({...formData, [e.target.value]: e.target.value})
     // }
      const router = useRouter()
+     const queryClient = useQueryClient()
 
     const {register, handleSubmit, formState:{errors,  }} = useForm({
         defaultValues:{
@@ -42,13 +41,17 @@ export const LoginForm = () =>{
     const { mutate, isPending } = useMutation({
         mutationFn: login,
         onSuccess: (response) => {
-            console.log('on Success', response)
             toast.success(response?.message ?? 'Login Success!!')
-            router.replace('/')
+            queryClient.invalidateQueries({ queryKey: ['me']})
+
+        const role = response?.data?.user?.role
+            if(role === Role.ADMIN  || role === Role.SUPER_ADMIN){
+                router.replace('/admin')
+            } else {
+                router.replace("/")
+            }
         },
-        onError: (error) =>
-        {
-            console.log('on Error', error)
+        onError: (error) =>{ 
             toast.error(error?.message ?? 'Login Failed')
         }
     })

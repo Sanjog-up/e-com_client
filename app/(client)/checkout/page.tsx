@@ -94,6 +94,7 @@ const Checkout = () => {
         <button
         type='submit'
         disabled={isPending}
+        
         className='w-full py-3 rounded-md bg-black text-white text-sm font-medium hover:bg-gray-800 disabled:opacity-50'>
           {isPending ? 'Placing Order...' : 'Place Order'}
         </button>
