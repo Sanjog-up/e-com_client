@@ -5,8 +5,9 @@ import { TLoginInput, TRegisterInput } from "@/types/auth.types";
 export const login = async (data: TLoginInput) => {
   try {
     const response = await api.post("/auth/login",data);
+    const token = response.data?.data?.access_token
     if(response.data?.data?.access_token){
-      localStorage.setItem("access_token", response.data.data.access_token);
+      localStorage.setItem("access_token", token);
     }
     return response.data;
   } catch (error: any) {
