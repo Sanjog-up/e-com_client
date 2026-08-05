@@ -5,7 +5,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
-import { MdOutlineAccountCircle } from "react-icons/md";
+import { MdOutlineAccountCircle, MdOutlineReceiptLong } from "react-icons/md";
 import { useAuth } from "@/hooks/auth.hook";
 import { IUser } from "@/context/auth.context";
 import { HiOutlineMenu } from "react-icons/hi";
@@ -13,169 +13,230 @@ import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
 
 const Navbar = () => {
-    const { isAuthenticated, isLoading, logout, user } = useAuth();
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isAuthenticated, isLoading, logout, user } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    return (
-        <header className="sticky min-w-fit top-0 z-50 border-b border-zinc-200 bg-white">
-        <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors gap-4">
-            
-            <Link href={"/"} 
-            className="whitespace-nowrap text-3xl shrink-0 font-serif text-blue-700">
-              Grey Matter </Link>  
+  return (
+    <header className="sticky min-w-fit top-0 z-50 border-b border-zinc-200 bg-white">
+      <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors gap-4">
+        <Link
+          href={"/"}
+          className="whitespace-nowrap text-3xl shrink-0 font-serif text-blue-700"
+        >
+          Grey Matter{" "}
+        </Link>
 
-            {/* desktop nav - hidden below md breakpoint */}
-            <div className="hidden  md:flex items-center">
-            <section className="flex items-center gap-2  scrollbar-hide min-w-0">
-            <Link href={"/"} 
-            className='italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl whitespace-nowrap ' >
-            Home
-            </Link>
-
-            <Link href={"/products"} 
-            className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl ">
-            Products
-            </Link>
-
-            <Link href={"/about"} 
-            className="italic font-serif font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap">
-            About Us
-            </Link>
-
-            <Link href={"/contact-us"} 
-            className="italic font-serif  font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap">
-            Contact Us
-            </Link>  
-            </section>
-          
-          </div>
-
-            {/* auth & cart */}
-            <div className="hidden md:block">
-                {isLoading ? 
-            <AuthUserSkeleton/> : isAuthenticated ?  <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}              
-            </div>
-
-            {/* mobile hamburger toggle */}
-            <button className="md:hidden"
-            onClick={()=> setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+        {/* desktop nav - hidden below md breakpoint */}
+        <div className="hidden  md:flex items-center">
+          <section className="flex items-center gap-2  scrollbar-hide min-w-0">
+            <Link
+              href={"/"}
+              className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl whitespace-nowrap "
             >
-                <HiOutlineMenu size={26} className="text-blue-700"/>
-            </button>
-        </nav>
-        {/* Mobile menu panel */}
+              Home
+            </Link>
+
+            <Link
+              href={"/products"}
+              className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl "
+            >
+              Products
+            </Link>
+
+            <Link
+              href={"/about"}
+              className="italic font-serif font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap"
+            >
+              About Us
+            </Link>
+
+            <Link
+              href={"/contact-us"}
+              className="italic font-serif  font-semibold text-blue-800 px-2 py-2  hover:bg-blue-300 rounded-xl whitespace-nowrap"
+            >
+              Contact Us
+            </Link>
+          </section>
+        </div>
+
+        {/* auth & cart */}
+        <div className="hidden md:block">
+          {isLoading ? (
+            <AuthUserSkeleton />
+          ) : isAuthenticated ? (
+            <AuthUser user={user} isLoading={isLoading} logout={logout} />
+          ) : (
+            <AuthButtons />
+          )}
+        </div>
+
+        {/* mobile hamburger toggle */}
+        <button
+          className="md:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <HiOutlineMenu size={26} className="text-blue-700" />
+        </button>
+      </nav>
+      {/* Mobile menu panel */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-zinc-200 bg-white px-4 py-4 flex flex-col gap-2">
-          <Link href={"/"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Home</Link>
-          <Link href={"/products"} className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Products</Link>
-          <Link href={"/about"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">About Us</Link>
-          <Link href={"/contact-us"} className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Contact Us</Link>
-          <div className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">Categories</div>
+          <Link
+            href={"/"}
+            className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl"
+          >
+            Home
+          </Link>
+          <Link
+            href={"/products"}
+            className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl"
+          >
+            Products
+          </Link>
+          <Link
+            href={"/about"}
+            className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl"
+          >
+            About Us
+          </Link>
+          <Link
+            href={"/contact-us"}
+            className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl"
+          >
+            Contact Us
+          </Link>
+          <div className="italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-300 rounded-xl">
+            Categories
+          </div>
 
           <div className="pt-2 border-t border-zinc-100">
-            {isLoading ?  <AuthUserSkeleton/> : isAuthenticated ? <AuthUser user={user} isLoading={isLoading} logout={logout} /> : <AuthButtons />}
+            {isLoading ? (
+              <AuthUserSkeleton />
+            ) : isAuthenticated ? (
+              <AuthUser user={user} isLoading={isLoading} logout={logout} />
+            ) : (
+              <AuthButtons />
+            )}
           </div>
         </div>
       )}
-</header>
-    )
-  }
+    </header>
+  );
+};
 
 const AuthUser = ({
-    user,
-    isLoading,
-    logout,
+  user,
+  isLoading,
+  logout,
 }: {
-    user: IUser | null;
-    isLoading: boolean;
-    logout: () => void;
+  user: IUser | null;
+  isLoading: boolean;
+  logout: () => void;
 }) => {
-    const isAdmin = user?.role === "Admin";
-    const { data: cart} = useCart();
-    const itemCount = cart?.cart?.items?.reduce((sum:number, item:any) => sum + item.quantity, 0) ?? 0;
-    return (
-        <div className="flex items-center gap-3">
-            {!isAdmin &&(
-            <div className="flex gap-2 items-center ">
-                <Link className="mt-1" title="Wishlist" href={"/wishlists"}>
-                    <FaRegHeart className="text-red-400 " size={22} />
-                </Link>
+  const isAdmin = user?.role === "Admin";
+  const { data: cart } = useCart();
+  const itemCount =
+    cart?.cart?.items?.reduce(
+      (sum: number, item: any) => sum + item.quantity,
+      0,
+    ) ?? 0;
+  return (
+    <div className="flex items-center gap-3">
+      {!isAdmin && (
+        <div className="flex gap-2 items-center ">
+          <Link className="mt-1" title="Wishlist" href={"/wishlists"}>
+            <FaRegHeart className="text-red-400 " size={22} />
+          </Link>
 
-                <Link title="Cart" href={"/cart"} className="relative">
-                    <HiOutlineShoppingBag className="text-indigo-600" size={24} />
-                    {itemCount > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-indigo-500 text-white text-[10px] font-semibold h-4 w-4 flex items-center justify-center">
-                            {itemCount}
-                        </span>
-                    )}
-                </Link>
-            </div>
+          <Link title="Cart" href={"/cart"} className="relative">
+            <HiOutlineShoppingBag className="text-indigo-600" size={24} />
+            {itemCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-indigo-500 text-white text-[10px] font-semibold h-4 w-4 flex items-center justify-center">
+                {itemCount}
+              </span>
             )}
-            {/* auth */}
-            <div className="flex gap-2 items-center">
-                {/* profile image  */}
-                <div className="h-14 aspect-square rounded-full overflow-clip p-0.5 border border-indigo-200">
-                    <Image
-                        src={user?.profile_image ? user?.profile_image.path : "/images/asap.webp"}
-                        alt="profile_image"
-                        height={200}
-                        width={200}
-                        loading="lazy"
-                        className="h-full w-full rounded-full object-cover object-left"
-                    />
-                </div>
+          </Link>
 
-                <div>
-                    {/* name */}
-                    <p className="text-lg font-semibold italic text-gray-700">{user?.full_name}</p>
-                    {/* logout */}
-                    <div onClick={logout} className="cursor-pointer  text-red-500 flex gap-1 items-center -mt-1">
-                        <IoLogOutOutline size={22} />
-                        <p className="text-sm">Logout</p>
-                    </div>
-                </div>
-            </div>
+            
+          <Link title="My Orders" href={"/orders"}>
+            <MdOutlineReceiptLong className="text-indigo-600" size={24} />
+          </Link>
         </div>
-    );
+      )}
+      {/* auth */}
+      <div className="flex gap-2 items-center">
+        {/* profile image  */}
+        <div className="h-14 aspect-square rounded-full overflow-clip p-0.5 border border-indigo-200">
+          <Image
+            src={
+              user?.profile_image
+                ? user?.profile_image.path
+                : "/images/asap.webp"
+            }
+            alt="profile_image"
+            height={200}
+            width={200}
+            loading="lazy"
+            className="h-full w-full rounded-full object-cover object-left"
+          />
+        </div>
+
+        <div>
+          {/* name */}
+          <p className="text-lg font-semibold italic text-gray-700">
+            {user?.full_name}
+          </p>
+          {/* logout */}
+          <div
+            onClick={logout}
+            className="cursor-pointer  text-red-500 flex gap-1 items-center -mt-1"
+          >
+            <IoLogOutOutline size={22} />
+            <p className="text-sm">Logout</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const AuthButtons = () => {
-    return (
-        <div className="flex gap-2 items-center">
-            <Link className="flex items-center " href={"/auth/login"}>
-                <div className="text-white font-bold hover:bg-blue-600 transition-all duration-300 bg-blue-500 flex items-center gap-1 py-2 px-3 border border-indigo-500 rounded ">
-                    <LuLogIn size={22} />
-                    <p>Login</p>
-                </div>
-            </Link>
-            <Link className="flex items-center " href={"/auth/register"}>
-                <div className="text-blue-500 font-bold  transition-all duration-300 flex items-center gap-1 py-2 px-3 border border-blue-500 rounded ">
-                    <MdOutlineAccountCircle size={26} />
-                    <p>Register</p>
-                </div>
-            </Link>
+  return (
+    <div className="flex gap-2 items-center">
+      <Link className="flex items-center " href={"/auth/login"}>
+        <div className="text-white font-bold hover:bg-blue-600 transition-all duration-300 bg-blue-500 flex items-center gap-1 py-2 px-3 border border-indigo-500 rounded ">
+          <LuLogIn size={22} />
+          <p>Login</p>
         </div>
-    );
+      </Link>
+      <Link className="flex items-center " href={"/auth/register"}>
+        <div className="text-blue-500 font-bold  transition-all duration-300 flex items-center gap-1 py-2 px-3 border border-blue-500 rounded ">
+          <MdOutlineAccountCircle size={26} />
+          <p>Register</p>
+        </div>
+      </Link>
+    </div>
+  );
 };
 
 const AuthUserSkeleton = () => {
-    return(
-        <div className="flex items-center gap-3 animate-pulse">
-            <div className="flex gap-2 items-center">
-                <div className="h-5 w-5 rounded-full bg-zinc-200"/>
-                <div className="h-6 w-6 rounded-full bg-zinc-200"/>
-            </div>
+  return (
+    <div className="flex items-center gap-3 animate-pulse">
+      <div className="flex gap-2 items-center">
+        <div className="h-5 w-5 rounded-full bg-zinc-200" />
+        <div className="h-6 w-6 rounded-full bg-zinc-200" />
+      </div>
 
-            <div className="flex gap-2 items-center">
-                <div className="h-14 aspect-square rounded-full bg-zinc-200"/>
-                <div className="flex flex-col gap-1">
-                    <div className="h-4 w-24 rounded bg-zinc-200"/>
-                    <div className="h-3 w-14 rounded bg-zinc-200"/>
-                </div>
-            </div>
+      <div className="flex gap-2 items-center">
+        <div className="h-14 aspect-square rounded-full bg-zinc-200" />
+        <div className="flex flex-col gap-1">
+          <div className="h-4 w-24 rounded bg-zinc-200" />
+          <div className="h-3 w-14 rounded bg-zinc-200" />
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 export default Navbar;

@@ -16,7 +16,7 @@ export const ProductModal = () => {
         enabled: !!productId,
         
     })
-    const product: TProduct | undefined = data?.data?.[0]
+    const product: TProduct | undefined = data?.data
     if(!productId)
         return null
     return(
