@@ -29,7 +29,7 @@ const EditProductPage = () => {
         linkText="Go Back"
         link="/admin/products"
       />
-      <ProductForm defaultValues={product?.data} productId={id} />
+      <ProductForm defaultValues={product?.data?.[0]} productId={id} />
     </main>
   );
 };
