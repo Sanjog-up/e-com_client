@@ -25,7 +25,7 @@ export default function ProductClients() {
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort") ?? "";
   const category = searchParams.get("category") ?? "";
-  const search = searchParams.get("query") ?? searchParams.get("query") ?? "";
+  const search = searchParams.get("query") ?? "";
   const router = useRouter();
 
   const [searchInput , setSearchInput] = useState(search);
@@ -70,7 +70,7 @@ export default function ProductClients() {
 
     if (nextSort) params.set("sort", nextSort);
     if (nextCategory) params.set("category", nextCategory);
-    if (nextSearch) params.set("search", nextSearch);
+    if (nextSearch) params.set("query", nextSearch);
 
     const qs = params.toString();
     return qs ? `/products?${qs}` : "/products";
