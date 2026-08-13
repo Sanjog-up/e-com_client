@@ -17,7 +17,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky min-w-fit top-0 z-50 border-b border-zinc-200 bg-white">
+    <header className="sticky  top-0 z-50 w-full border-b border-zinc-200 bg-white">
       <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors gap-4">
         <Link
           href={"/"}
